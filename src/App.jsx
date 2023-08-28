@@ -1,12 +1,13 @@
-import React from 'react';
-import './App.css';
-import RoadmapGenerator from './RoadmapGenerator.jsx';
+import React from "react";
+import "./App.css";
+import RoadmapGenerator from "./RoadmapGenerator.jsx";
+import { RoadmapProvider } from "./RoadmapContext.jsx";
 
 function App() {
   return (
-    <div className="App">
+    <RoadmapProvider>
       <RoadmapGenerator />
-    </div>
+    </RoadmapProvider>
   );
 }
 
