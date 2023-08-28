@@ -14,9 +14,9 @@ const Table = ({ roadmap }) => {
                 <tbody>
                     {roadmap.map((task, index) => {
                         const lines = task.split("\n");
-                        const day = lines[0];
-                        const description = lines[1];
-                        const tasks = lines.slice(2);
+                        const day = lines[0].trim();
+                        const description = lines[1].trim();
+                        const tasks = lines.slice(2).map(task => task.trim()).filter(task => task !== '');
                         return (
                             <tr key={index}>
                                 <td className="py-2 px-8">{day}</td>
@@ -30,8 +30,7 @@ const Table = ({ roadmap }) => {
                                 </td>
                             </tr>
                         );
-                    }
-                    )}
+                    })}
                 </tbody>
             </table>
         </div>
