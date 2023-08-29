@@ -1,6 +1,6 @@
-import { useRoadmapContext } from "./RoadmapContext";
 import { useState } from "react";
 import Table from "./Table";
+import { useRoadmapContext } from "../context/RoadmapContext";
 
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");

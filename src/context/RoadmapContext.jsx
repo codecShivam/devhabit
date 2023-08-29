@@ -11,7 +11,7 @@ export const RoadmapProvider = ({ children }) => {
 
   const generateRoadmap = async (domain, days) => {
     try {
-      const apiKey = "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"; // Replace with your actual API key
+      const apiKey = "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";
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
@@ -54,7 +54,9 @@ Tasks:
 
       if (res.status === 200) {
         const roadmapText = data.choices[0].text;
-        const tasks = roadmapText.match(/Day \d+:\n(.*?)\nTasks:\n([\s\S]+?)(?=\n\nDay \d+|$)/g);
+        const tasks = roadmapText.match(
+          /Day \d+:\n(.*?)\nTasks:\n([\s\S]+?)(?=\n\nDay \d+|$)/g
+        );
         setRoadmap(tasks || []);
       }
     } catch (error) {
