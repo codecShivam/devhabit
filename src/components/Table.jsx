@@ -1,6 +1,7 @@
 import React from "react";
+import { useRoadmapContext } from "../context/RoadmapContext";
 
-const Table = ({ roadmap }) => {
+const Table = ({roadmap}) => {
     return (
         <div className="overflow-x-auto">
             <table className="w-full table-auto mt-4 border border-collapse">

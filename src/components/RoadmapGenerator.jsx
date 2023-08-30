@@ -8,6 +8,7 @@ const RoadmapGenerator = () => {
   const { roadmap, generateRoadmap } = useRoadmapContext();
 
   const handleGenerateRoadmap = () => {
+    console.log(domain, days)
     generateRoadmap(domain, days);
   };
 
