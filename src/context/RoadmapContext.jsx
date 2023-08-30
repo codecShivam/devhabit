@@ -11,14 +11,14 @@ export const RoadmapProvider = ({ children }) => {
 
   const generateRoadmap = async (domain, days) => {
     try {
-      const apiKey = "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"; // Replace with your actual API key
+      const apiKey = "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"; 
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       };
       const body = {
         model: "text-davinci-003",
-        prompt: `Create a day-wise roadmap to learn java in 4 days. Provide a detailed plan for each day, including tasks and topics to cover. Start with the basics and progress to more advanced concepts. Add a brief description for each day's tasks. Make sure to break down the learning material appropriately. Format the output as follows:
+        prompt: `Create a day-wise roadmap to learn ${domain} in ${days} days. Provide a detailed plan for each day, including tasks and topics to cover. Start with the basics and progress to more advanced concepts. Add a brief description for each day's tasks. Make sure to break down the learning material appropriately. Format the output as follows:
 
         Day 1:
         Description: [Description of tasks and topics]
@@ -34,7 +34,7 @@ export const RoadmapProvider = ({ children }) => {
 
         ...
 
-        Day 4:
+        Day ${days}:
         Description: [Description of tasks and topics]
         - [Task 1]
         - [Task 2]
