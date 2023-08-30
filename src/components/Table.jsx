@@ -1,5 +1,4 @@
 import React from "react";
-import { useRoadmapContext } from "../context/RoadmapContext";
 
 const Table = ({roadmap}) => {
     return (
@@ -15,9 +14,9 @@ const Table = ({roadmap}) => {
                 <tbody>
                     {roadmap.map((task, index) => {
                         const lines = task.split("\n");
-                        const day = lines[0].trim();
-                        const description = lines[1].trim();
-                        const tasks = lines.slice(2).map(task => task.trim()).filter(task => task !== '');
+                        const day = (lines[0].trim()).slice(0, -1);
+                        const description = lines[1].trim().slice(12);
+                        const tasks = lines.slice(2).map(task => task.trim().slice(1)).filter(task => task !== '');
                         return (
                             <tr key={index}>
                                 <td className="py-2 px-8">{day}</td>

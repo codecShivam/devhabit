@@ -18,7 +18,7 @@ export const RoadmapProvider = ({ children }) => {
       };
       const body = {
         model: "text-davinci-003",
-        prompt: `Create a day-wise roadmap to learn ${domain} in ${days} days. Provide a detailed plan for each day, including tasks and topics to cover. Start with the basics and progress to more advanced concepts. Add a brief description for each day's tasks. Make sure to break down the learning material appropriately. Format the output as follows:
+        prompt: `Create a day-wise roadmap to learn java in 4 days. Provide a detailed plan for each day, including tasks and topics to cover. Start with the basics and progress to more advanced concepts. Add a brief description for each day's tasks. Make sure to break down the learning material appropriately. Format the output as follows:
 
         Day 1:
         Description: [Description of tasks and topics]
@@ -34,7 +34,7 @@ export const RoadmapProvider = ({ children }) => {
 
         ...
 
-        Day ${days}:
+        Day 4:
         Description: [Description of tasks and topics]
         - [Task 1]
         - [Task 2]
