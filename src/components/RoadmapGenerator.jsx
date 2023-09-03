@@ -13,8 +13,8 @@ const RoadmapGenerator = () => {
   };
 
   return (
-    <div className="App p-4 md:p-8">
-      <div className="sm:max-w-4xl container mx-auto">
+    <div className="App p-4 md:p-8 ">
+      <div className="sm:max-w-4xl container mx-auto text-[#ECEDEE] font-bold tracking-tight">
         <label htmlFor="domainInput" className="block mb-2">
           Domain:
         </label>
