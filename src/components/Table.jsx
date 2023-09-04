@@ -4,8 +4,8 @@ const Table = ({ roadmap }) => {
   return (
     <div className="overflow-x-auto">
       <table className="w-full table-auto mt-4 border border-collapse border-white">
-        <thead className="border-white border">
-          <tr className="border-white border">
+        <thead>
+          <tr>
             <th className="py-2 px-8 border-white border">Day</th>
             <th className="py-2 px-4 border-white border">Description</th>
             <th className="py-2 px-4 border-white border">Tasks</th>
