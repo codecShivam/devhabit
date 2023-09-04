@@ -11,7 +11,7 @@ export const RoadmapProvider = ({ children }) => {
 
   const generateRoadmap = async (domain, days) => {
     try {
-      const apiKey = "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"; 
+      const apiKey = "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";
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,

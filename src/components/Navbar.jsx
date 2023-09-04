@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  const showDropdownMenu = () => {
-    setShowDropdown(true);
-  };
-
-  const hideDropdownMenu = () => {
-    setShowDropdown(false);
-  };
-
-  const toggleMobileMenu = () => {
-    setShowMobileMenu(!showMobileMenu);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
   };
 
   return (
@@ -22,55 +13,38 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-bold">Your Logo</div>
         <div className="lg:hidden">
-          <button onClick={toggleMobileMenu} className="text-white">
+          <button onClick={toggleSidebar} className="text-white">
             <FaBars />
           </button>
         </div>
         <div
           className={`lg:flex space-x-4 ${
-            showMobileMenu ? 'block' : 'hidden'
-          }`}
+            showSidebar
+              ? "fixed inset-0 bg-[#151718] w-1/2 min-h-screen z-50 p-4 transform translate-x-0 transition-transform duration-300"
+              : "hidden"
+          } lg:space-x-6 lg:block lg:w-auto`}
         >
           <a
             href="#"
-            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300"
+            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300 block lg:inline-block"
           >
             Home
           </a>
-          <div
-            className="relative inline-block text-white"
-            onMouseEnter={showDropdownMenu}
-            onMouseLeave={hideDropdownMenu}
-          >
-            <button className="hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300">
-              Services
-            </button>
-            {showDropdown && (
-              <div className="absolute top-10 left-1/2 transform -translate-x-1/2 w-48 bg-[#151718] text-white rounded-md shadow-lg">
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-[#26292b]"
-                >
-                  Service 1
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-[#26292b]"
-                >
-                  Service 2
-                </a>
-              </div>
-            )}
-          </div>
           <a
             href="#"
-            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300"
+            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300 block lg:inline-block"
           >
             About
           </a>
           <a
             href="#"
-            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300"
+            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300 block lg:inline-block"
+          >
+            Services
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-[#26292b] px-3 py-2 rounded-md transition duration-300 block lg:inline-block"
           >
             Contact
           </a>

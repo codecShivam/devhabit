@@ -8,7 +8,7 @@ const RoadmapGenerator = () => {
   const { roadmap, generateRoadmap } = useRoadmapContext();
 
   const handleGenerateRoadmap = () => {
-    console.log(domain, days)
+    console.log(domain, days);
     generateRoadmap(domain, days);
   };
 
@@ -21,7 +21,7 @@ const RoadmapGenerator = () => {
         <input
           type="text"
           id="domainInput"
-          className="w-full px-2 py-1 border rounded"
+          className="w-full px-2 py-1 border rounded text-gray-600"
           placeholder="Enter domain"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
@@ -33,7 +33,7 @@ const RoadmapGenerator = () => {
         <input
           type="number"
           id="daysInput"
-          className="w-full px-2 py-1 border rounded"
+          className="w-full px-2 py-1 border rounded text-gray-600"
           placeholder="Enter number of days"
           value={days}
           onChange={(e) => setDays(e.target.value)}
