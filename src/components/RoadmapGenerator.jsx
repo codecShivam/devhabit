@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Table from "./Table";
 import { useRoadmapContext } from "../context/RoadmapContext";
-import { Button } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
@@ -19,11 +19,15 @@ const RoadmapGenerator = () => {
         <label htmlFor="domainInput" className="block mb-2 text-gray-700">
           Domain:
         </label>
-        <input
-          type="text"
+        <Input
+          type="email"
+          placeholder="Email Address"
+          className="!border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10"
+          labelProps={{
+            className: "hidden",
+          }}
+          containerProps={{ className: "min-w-[100px]" }}
           id="domainInput"
-          className="w-full px-2 py-1 border rounded text-gray-600"
-          placeholder="Enter domain"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
         />
@@ -31,11 +35,14 @@ const RoadmapGenerator = () => {
         <label htmlFor="daysInput" className="block my-2 text-gray-700">
           Number of Days:
         </label>
-        <input
-          type="number"
-          id="daysInput"
-          className="w-full px-2 py-1 border rounded text-gray-600"
-          placeholder="Enter number of days"
+        <Input
+          type="email"
+          placeholder="Email Address"
+          className="!border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10"
+          labelProps={{
+            className: "hidden",
+          }}
+          containerProps={{ className: "min-w-[100px]" }}
           value={days}
           onChange={(e) => setDays(e.target.value)}
         />
