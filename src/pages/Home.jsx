@@ -1,15 +1,13 @@
 import React from "react";
 import Navbar from "../components/NavbarMenu";
-import RoadmapGenerator from "../components/RoadmapGenerator";
-import { RoadmapProvider } from "../context/RoadmapContext";
+import Roadmap from "./Roadmap";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <RoadmapProvider>
-        <RoadmapGenerator />
-      </RoadmapProvider>
+      <Outlet />
     </>
   );
 };

@@ -28,7 +28,7 @@ import {
   PuzzlePieceIcon,
   GiftIcon,
 } from "@heroicons/react/24/outline";
- 
+
 const colors = {
   blue: "bg-blue-50 text-blue-500",
   orange: "bg-orange-50 text-orange-500",
@@ -39,7 +39,7 @@ const colors = {
   cyan: "bg-cyan-50 text-cyan-500",
   pink: "bg-pink-50 text-pink-500",
 };
- 
+
 const navListMenuItems = [
   {
     color: "blue",
@@ -81,7 +81,8 @@ const navListMenuItems = [
     color: "teal",
     icon: FaceSmileIcon,
     title: "Community Engagement",
-    description: "Set of beautiful icons that you can use in your project.",
+    description:
+      "Enhancing participation and collaboration within communities.",
   },
   {
     color: "cyan",
@@ -96,11 +97,11 @@ const navListMenuItems = [
     description: "List of all our open-source projects, it's all free.",
   },
 ];
- 
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
- 
+
   const renderItems = navListMenuItems.map(
     ({ icon, title, description, color }, key) => (
       <a href="#" key={key}>
@@ -127,7 +128,7 @@ function NavListMenu() {
       </a>
     )
   );
- 
+
   return (
     <React.Fragment>
       <Menu
@@ -171,7 +172,7 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
@@ -203,17 +204,17 @@ function NavList() {
     </List>
   );
 }
- 
- function NavbarMenu() {
+
+function NavbarMenu() {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
- 
+
   return (
     <Navbar className=" max-w-full  px-4 py-2 rounded-none">
       <div className="flex items-center justify-between text-blue-gray-900">
