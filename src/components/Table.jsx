@@ -3,12 +3,12 @@ import React from "react";
 const Table = ({ roadmap }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full table-auto mt-4 border border-collapse border-white">
+      <table className="w-full table-auto mt-4 border border-collapse">
         <thead>
           <tr>
-            <th className="py-2 px-8 border-white border">Day</th>
-            <th className="py-2 px-4 border-white border">Description</th>
-            <th className="py-2 px-4 border-white border">Tasks</th>
+            <th className="py-2 px-8 border text-gray-700">Day</th>
+            <th className="py-2 px-4 border text-gray-700">Description</th>
+            <th className="py-2 px-4 border text-gray-700">Tasks</th>
           </tr>
         </thead>
         <tbody>
@@ -22,9 +22,11 @@ const Table = ({ roadmap }) => {
               .filter((task) => task !== "");
             return (
               <tr key={index}>
-                <td className="py-2 px-8 border border-white">{day}</td>
-                <td className="py-2 px-4 border border-white">{description}</td>
-                <td className="py-2 px-4 border border-white">
+                <td className="py-2 px-8 border text-gray-700">{day}</td>
+                <td className="py-2 px-4 border text-gray-700">
+                  {description}
+                </td>
+                <td className="py-2 px-4 border text-gray-700">
                   <ul>
                     {tasks.map((task, index) => (
                       <li key={index}>{task}</li>

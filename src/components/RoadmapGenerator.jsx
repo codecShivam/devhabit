@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Table from "./Table";
 import { useRoadmapContext } from "../context/RoadmapContext";
+import { Button } from "@material-tailwind/react";
 
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
@@ -15,7 +16,7 @@ const RoadmapGenerator = () => {
   return (
     <div className="App p-4 md:p-8 ">
       <div className="sm:max-w-4xl container mx-auto text-[#ECEDEE] font-bold tracking-tight">
-        <label htmlFor="domainInput" className="block mb-2">
+        <label htmlFor="domainInput" className="block mb-2 text-gray-700">
           Domain:
         </label>
         <input
@@ -27,7 +28,7 @@ const RoadmapGenerator = () => {
           onChange={(e) => setDomain(e.target.value)}
         />
         <br />
-        <label htmlFor="daysInput" className="block my-2">
+        <label htmlFor="daysInput" className="block my-2 text-gray-700">
           Number of Days:
         </label>
         <input
@@ -39,14 +40,14 @@ const RoadmapGenerator = () => {
           onChange={(e) => setDays(e.target.value)}
         />
         <br />
-        <button
+        <Button
           id="fetchButton"
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+          className="bg-blue-400 text-white mt-4"
           onClick={handleGenerateRoadmap}
         >
           Generate Roadmap
-        </button>
-        <h2 className="mt-8 text-xl font-semibold">Roadmap</h2>
+        </Button>
+        <h2 className="mt-8 text-xl font-semibold text-gray-700">Roadmap</h2>
         <Table roadmap={roadmap} />
       </div>
     </div>
