@@ -28,6 +28,7 @@ import {
   PuzzlePieceIcon,
   GiftIcon,
 } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 const colors = {
   blue: "bg-blue-50 text-blue-500",
@@ -176,6 +177,7 @@ function NavListMenu() {
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+      <NavLink to="/roadmap">
       <Typography
         as="a"
         href="#"
@@ -188,6 +190,7 @@ function NavList() {
           Roadmap Generator
         </ListItem>
       </Typography>
+      </NavLink>
       <NavListMenu />
       <Typography
         as="a"
