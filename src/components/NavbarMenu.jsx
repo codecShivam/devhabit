@@ -104,8 +104,11 @@ const getNavLinkPath = (title) => {
     "About us": "/about",
     "Contact us": "/contact",
     "Personalised Learning Paths": "/roadmap",
+    "Community Engagement": "/community",
+    "Streak Tracking": "/streak",
+    "Open Source": "/opensource",
   };
-  return path[title] || "/";
+  return path[title] || "/mentorship";
 };
 
 function NavListMenu() {
@@ -228,26 +231,32 @@ function NavbarMenu() {
   }, []);
 
   return (
-    <Navbar className=" max-w-full  px-4 py-2 rounded-none">
+    <Navbar className=" max-w-full bg-transparent  px-4 py-2 rounded-none">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
-        >
-          Devhabit
-        </Typography>
+        <NavLink to="/">
+          <Typography
+            as="a"
+            href="#"
+            variant="h6"
+            className="mr-4 cursor-pointer py-1.5 lg:ml-2"
+          >
+            Devhabit
+          </Typography>
+        </NavLink>
         <div className="hidden lg:block">
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <Button variant="text" size="sm" color="blue-gray">
-            Sign In
-          </Button>
-          <Button variant="gradient" size="sm">
-            Sign Up
-          </Button>
+          <NavLink to="/signin">
+            <Button variant="text" size="sm" color="blue-gray">
+              Sign In
+            </Button>
+          </NavLink>
+          <NavLink to="/signup">
+            <Button variant="gradient" size="sm">
+              Sign Up
+            </Button>
+          </NavLink>
         </div>
         <IconButton
           variant="text"

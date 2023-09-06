@@ -1,6 +1,6 @@
 import React from "react";
-import RoadmapGenerator from "../components/RoadmapGenerator";
-import { RoadmapProvider } from "../context/RoadmapContext";
+import RoadmapGenerator from "../../components/RoadmapGenerator";
+import { RoadmapProvider } from "../../context/RoadmapContext";
 import { Outlet } from "react-router-dom";
 
 const Roadmap = () => {

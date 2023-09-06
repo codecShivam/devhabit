@@ -1,17 +1,15 @@
 import React from "react";
-import contact from "./contact.css";
 import { Outlet } from "react-router-dom";
 
-const Contact = () => {
+const Building = () => {
   return (
     <>
       <h1 className="font-bold text-4xl text-gray-700 text-center mt-16">
-        Contact Us!
+        Under Construction!
       </h1>
-
       <Outlet />
     </>
   );
 };
 
-export default Contact;
+export default Building;
