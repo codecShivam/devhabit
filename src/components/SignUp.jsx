@@ -11,19 +11,19 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp , setOpenSignIn}) {
-
+export function SignUp({ openSignUp, handleOpenSignUp, handleOpenSignIn , setOpenSignUp}) {
+ 
 
   return (
     <>
-      <Button onClick={handleOpenSignIn} variant="text" size="sm" color="blue-gray">
-        Sign In
+      <Button onClick={handleOpenSignUp}  variant="gradient" size="sm">
+        Sign Up
       </Button>
 
       <Dialog
         size="xs"
-        open={openSignIn}
-        handler={handleOpenSignIn}
+        open={openSignUp}
+        handler={handleOpenSignUp}
         className="bg-transparent shadow-none"
       >
         <Card className="mx-auto w-full max-w-[24rem]">
@@ -33,22 +33,40 @@ export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp , setOpe
             className="mb-4 grid h-28 place-items-center"
           >
             <Typography variant="h3" color="white">
-              Sign In
+              Sign Up
             </Typography>
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
+          <Input size="lg" label="Name" />
             <Input label="Email" size="lg" />
             <Input label="Password" size="lg" />
             <div className="-ml-2.5">
-              <Checkbox label="Remember Me" />
+            <Checkbox
+          label={
+            <Typography
+              variant="small"
+              color="gray"
+              className="flex items-center font-normal"
+            >
+              I agree the
+              <a
+                href="#"
+                className="font-medium transition-colors hover:text-gray-900"
+              >
+                &nbsp;Terms and Conditions
+              </a>
+            </Typography>
+          }
+          containerProps={{ className: "-ml-2.5" }}
+        />
             </div>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" onClick={handleOpenSignIn} fullWidth>
-              Sign In
+            <Button variant="gradient" onClick={handleOpenSignUp} fullWidth>
+              Register
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
-              Don&apos;t have an account?
+              Already have an account?
               <Typography
                 as="a"
                 href="#signup"
@@ -57,7 +75,7 @@ export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp , setOpe
                 className="ml-1 font-bold"
                 onClick={handleOpenSignUp}
               >
-                Sign up
+                Sign in
               </Typography>
             </Typography>
           </CardFooter>

@@ -30,6 +30,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import { SignIn } from "./SignIn";
+import { SignUp } from "./SignUp";
 
 const colors = {
   blue: "bg-blue-50 text-blue-500",
@@ -222,6 +223,10 @@ function NavList() {
 }
 
 function NavbarMenu() {
+  const [openSignIn, setOpenSignIn] = React.useState(false);
+  const handleOpenSignIn = () => setOpenSignIn((cur) => !cur);
+  const [openSignUp, setOpenSignUp] = React.useState(false);
+  const handleOpenSignUp = () => setOpenSignUp((cur) => !cur);
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -248,12 +253,8 @@ function NavbarMenu() {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <SignIn />
-          <NavLink to="/signup">
-            <Button variant="gradient" size="sm">
-              Sign Up
-            </Button>
-          </NavLink>
+          <SignIn openSignIn={openSignIn} setOpenSignIn={setOpenSignIn} handleOpenSignIn={handleOpenSignIn} handleOpenSignUp={handleOpenSignUp} />
+          <SignUp openSignUp={openSignUp} setOpenSignUp={setOpenSignUp} handleOpenSignUp={handleOpenSignUp} handleOpenSignIn={handleOpenSignIn} />
         </div>
         <IconButton
           variant="text"
