@@ -11,12 +11,7 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignUp({
-  openSignUp,
-  handleOpenSignUp,
-  handleOpenSignIn,
-  setOpenSignUp,
-}) {
+export function SignUp({ openSignUp, handleOpenSignUp, handleOpenSignIn }) {
   return (
     <>
       <Button onClick={handleOpenSignUp} variant="gradient" size="sm">

@@ -11,12 +11,7 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignIn({
-  openSignIn,
-  handleOpenSignIn,
-  handleOpenSignUp,
-  setOpenSignIn,
-}) {
+export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp }) {
   return (
     <>
       <Button

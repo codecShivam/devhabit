@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Table from "./Table";
 import { useRoadmapContext } from "../context/RoadmapContext";
 import { Button, Input } from "@material-tailwind/react";
@@ -7,10 +7,12 @@ const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
   const [days, setDays] = useState("");
   const { roadmap, generateRoadmap } = useRoadmapContext();
+  const [loading, setLoading] = useState(false);
 
-  const handleGenerateRoadmap = () => {
-    console.log(domain, days);
-    generateRoadmap(domain, days);
+  const handleGenerateRoadmap = async () => {
+    setLoading(true);
+    await generateRoadmap(domain, days);
+    setLoading(false);
   };
 
   return (
@@ -55,7 +57,7 @@ const RoadmapGenerator = () => {
           Generate Roadmap
         </Button>
         <h2 className="mt-8 text-xl font-semibold text-gray-700">Roadmap</h2>
-        <Table roadmap={roadmap} />
+        <Table roadmap={roadmap} loading={loading}/>
       </div>
     </div>
   );

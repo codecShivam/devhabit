@@ -5,12 +5,7 @@ import animationData from "../assets/animation.json"; // Replace with the path t
 const Hero = () => {
   return (
     <>
-      {/* <div className="flex flex-row items-center justify-center">
-        <Lottie
-          animationData={animationData}
-          loop={true}
-          autoplay={true}
-          className="max-w-xl"<div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center">
         <Lottie
           animationData={animationData}
           loop={true}
@@ -18,8 +13,6 @@ const Hero = () => {
           className="max-w-xl"
         />
       </div>
-        />
-      </div> */}
       {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
           <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-5xl bg-gradient-to-r from-[#3578ff] to-[#ea4c89] bg-clip-text text-transparent">

@@ -253,8 +253,16 @@ function NavbarMenu() {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <SignIn openSignIn={openSignIn} setOpenSignIn={setOpenSignIn} handleOpenSignIn={handleOpenSignIn} handleOpenSignUp={handleOpenSignUp} />
-          <SignUp openSignUp={openSignUp} setOpenSignUp={setOpenSignUp} handleOpenSignUp={handleOpenSignUp} handleOpenSignIn={handleOpenSignIn} />
+          <SignIn
+            openSignIn={openSignIn}
+            handleOpenSignIn={handleOpenSignIn}
+            handleOpenSignUp={handleOpenSignUp}
+          />
+          <SignUp
+            openSignUp={openSignUp}
+            handleOpenSignUp={handleOpenSignUp}
+            handleOpenSignIn={handleOpenSignIn}
+          />
         </div>
         <IconButton
           variant="text"
