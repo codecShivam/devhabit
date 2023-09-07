@@ -29,6 +29,7 @@ import {
   GiftIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
+import { SignIn } from "./SignIn";
 
 const colors = {
   blue: "bg-blue-50 text-blue-500",
@@ -247,11 +248,7 @@ function NavbarMenu() {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <NavLink to="/signin">
-            <Button variant="text" size="sm" color="blue-gray">
-              Sign In
-            </Button>
-          </NavLink>
+          <SignIn />
           <NavLink to="/signup">
             <Button variant="gradient" size="sm">
               Sign Up
