@@ -11,12 +11,20 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp , setOpenSignIn}) {
-
-
+export function SignIn({
+  openSignIn,
+  handleOpenSignIn,
+  handleOpenSignUp,
+  setOpenSignIn,
+}) {
   return (
     <>
-      <Button onClick={handleOpenSignIn} variant="text" size="sm" color="blue-gray">
+      <Button
+        onClick={handleOpenSignIn}
+        variant="text"
+        size="sm"
+        color="blue-gray"
+      >
         Sign In
       </Button>
 
@@ -51,11 +59,13 @@ export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp , setOpe
               Don&apos;t have an account?
               <Typography
                 as="a"
-                href="#signup"
                 variant="small"
                 color="blue"
-                className="ml-1 font-bold"
-                onClick={handleOpenSignUp}
+                className="ml-1 font-bold cursor-pointer"
+                onClick={() => {
+                  handleOpenSignUp();
+                  handleOpenSignIn();
+                }}
               >
                 Sign up
               </Typography>

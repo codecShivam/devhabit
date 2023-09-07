@@ -11,12 +11,15 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignUp({ openSignUp, handleOpenSignUp, handleOpenSignIn , setOpenSignUp}) {
- 
-
+export function SignUp({
+  openSignUp,
+  handleOpenSignUp,
+  handleOpenSignIn,
+  setOpenSignUp,
+}) {
   return (
     <>
-      <Button onClick={handleOpenSignUp}  variant="gradient" size="sm">
+      <Button onClick={handleOpenSignUp} variant="gradient" size="sm">
         Sign Up
       </Button>
 
@@ -37,28 +40,28 @@ export function SignUp({ openSignUp, handleOpenSignUp, handleOpenSignIn , setOpe
             </Typography>
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
-          <Input size="lg" label="Name" />
+            <Input size="lg" label="Name" />
             <Input label="Email" size="lg" />
             <Input label="Password" size="lg" />
             <div className="-ml-2.5">
-            <Checkbox
-          label={
-            <Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
-            >
-              I agree the
-              <a
-                href="#"
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;Terms and Conditions
-              </a>
-            </Typography>
-          }
-          containerProps={{ className: "-ml-2.5" }}
-        />
+              <Checkbox
+                label={
+                  <Typography
+                    variant="small"
+                    color="gray"
+                    className="flex items-center font-normal"
+                  >
+                    I agree the
+                    <a
+                      href="#"
+                      className="font-medium transition-colors hover:text-gray-900"
+                    >
+                      &nbsp;Terms and Conditions
+                    </a>
+                  </Typography>
+                }
+                containerProps={{ className: "-ml-2.5" }}
+              />
             </div>
           </CardBody>
           <CardFooter className="pt-0">
@@ -69,11 +72,13 @@ export function SignUp({ openSignUp, handleOpenSignUp, handleOpenSignIn , setOpe
               Already have an account?
               <Typography
                 as="a"
-                href="#signup"
                 variant="small"
                 color="blue"
-                className="ml-1 font-bold"
-                onClick={handleOpenSignUp}
+                className="ml-1 font-bold cursor-pointer"
+                onClick={() => {
+                  handleOpenSignUp();
+                  handleOpenSignIn();
+                }}
               >
                 Sign in
               </Typography>
