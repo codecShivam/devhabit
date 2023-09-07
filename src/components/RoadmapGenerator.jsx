@@ -14,14 +14,14 @@ const RoadmapGenerator = () => {
   };
 
   return (
-    <div className="App p-4 md:p-8 ">
+    <div className="App p-4 md:p-8">
       <div className="sm:max-w-4xl container mx-auto text-[#ECEDEE] font-bold tracking-tight">
         <label htmlFor="domainInput" className="block mb-2 text-gray-700">
           Domain:
         </label>
         <Input
           type="email"
-          placeholder="Email Address"
+          placeholder="Enter domain"
           className="!border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10"
           labelProps={{
             className: "hidden",
@@ -37,7 +37,7 @@ const RoadmapGenerator = () => {
         </label>
         <Input
           type="email"
-          placeholder="Email Address"
+          placeholder="Enter days"
           className="!border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10"
           labelProps={{
             className: "hidden",

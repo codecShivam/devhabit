@@ -1,14 +1,39 @@
 import React from "react";
+import { Card, Typography } from "@material-tailwind/react";
 
 const Table = ({ roadmap }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full table-auto mt-4 border border-collapse">
+    <Card className="h-full w-full overflow-scroll mt-4">
+      <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            <th className="py-2 px-8 border text-gray-700">Day</th>
-            <th className="py-2 px-4 border text-gray-700">Description</th>
-            <th className="py-2 px-4 border text-gray-700">Tasks</th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Day
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Description
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Tasks
+              </Typography>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -20,16 +45,41 @@ const Table = ({ roadmap }) => {
               .slice(2)
               .map((task) => task.trim().slice(1))
               .filter((task) => task !== "");
+            const isLast = index === roadmap.length - 1;
+            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
             return (
               <tr key={index}>
-                <td className="py-2 px-8 border text-gray-700">{day}</td>
-                <td className="py-2 px-4 border text-gray-700">
-                  {description}
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {day}
+                  </Typography>
                 </td>
-                <td className="py-2 px-4 border text-gray-700">
+                <td className={`${classes} bg-blue-gray-50/50`}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {description}
+                  </Typography>
+                </td>
+                <td className={classes}>
                   <ul>
                     {tasks.map((task, index) => (
-                      <li key={index}>{task}</li>
+                      <li key={index}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {task}
+                        </Typography>
+                      </li>
                     ))}
                   </ul>
                 </td>
@@ -38,7 +88,7 @@ const Table = ({ roadmap }) => {
           })}
         </tbody>
       </table>
-    </div>
+    </Card>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import contact from "./contact.css";
+// import contact from "./contact.css";
 import { Outlet } from "react-router-dom";
 
 const Contact = () => {
