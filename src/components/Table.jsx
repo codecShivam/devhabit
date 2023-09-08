@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
-import { Spinner } from "@material-tailwind/react";
+import { Spinner, Checkbox } from "@material-tailwind/react";
 
 const Table = ({ roadmap, loading }) => {
   return (
@@ -68,12 +68,13 @@ const Table = ({ roadmap, loading }) => {
               return (
                 <tr key={index}>
                   <td className={classes}>
+                    <Checkbox />
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal"
+                      className="font-normal ml-2 inline-block"
                     >
-                      {day}
+                      <span>{day}</span>
                     </Typography>
                   </td>
                   <td className={`${classes} bg-blue-gray-50/50`}>
