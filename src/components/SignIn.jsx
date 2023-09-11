@@ -11,24 +11,14 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp }) {
+export function SignIn() {
   return (
     <>
-      <Button
-        onClick={handleOpenSignIn}
-        variant="text"
-        size="sm"
-        color="blue-gray"
-      >
+      <Button variant="text" size="sm" color="blue-gray">
         Sign In
       </Button>
 
-      <Dialog
-        size="xs"
-        open={openSignIn}
-        handler={handleOpenSignIn}
-        className="bg-transparent shadow-none"
-      >
+      <Dialog size="xs" className="bg-transparent shadow-none">
         <Card className="mx-auto w-full max-w-[24rem]">
           <CardHeader
             variant="gradient"
@@ -47,7 +37,7 @@ export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp }) {
             </div>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" onClick={handleOpenSignIn} fullWidth>
+            <Button variant="gradient" fullWidth>
               Sign In
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
@@ -57,10 +47,6 @@ export function SignIn({ openSignIn, handleOpenSignIn, handleOpenSignUp }) {
                 variant="small"
                 color="blue"
                 className="ml-1 font-bold cursor-pointer"
-                onClick={() => {
-                  handleOpenSignUp();
-                  handleOpenSignIn();
-                }}
               >
                 Sign up
               </Typography>

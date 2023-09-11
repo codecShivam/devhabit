@@ -1,19 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
+import React from "react";
+import Home from "./components/Home";
+import About from "./pages/about/About";
+import ReactDOM from "react-dom/client";
+import { SignIn } from "./pages/auth/SignIn";
+import Contact from "./pages/contact/Contact";
+import Roadmap from "./pages/roadmap/Roadmap";
+import Building from "./pages/building/Building";
 import { ThemeProvider } from "@material-tailwind/react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Home from "./components/Home";
-import Roadmap from "./pages/roadmap/Roadmap";
-import Contact from "./pages/contact/Contact";
-import About from "./pages/about/About";
-import Building from "./pages/building/Building";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <SignIn />,
     children: [
+      
       {
         path: "/roadmap",
         element: <Roadmap />,
