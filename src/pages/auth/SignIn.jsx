@@ -1,14 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  Dialog,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button
-} from "@material-tailwind/react";
-
 import { auth, provider, signInWithPopup } from "../../config/Firebase";
 import Home from "../../components/Home";
 
@@ -39,41 +29,20 @@ export function SignIn() {
   };
 
   return (
-    <div>
+    <div className="bg-blue-500 h-screen flex flex-col justify-center items-center">
+      <h1 className="text-4xl text-white font-semibold mb-8">Welcome to DevHabit</h1>
       {user ? (
         <Home />
       ) : (
-        <>
-          <Dialog
-            size="xs"
-            className="bg-transparent shadow-none"
-            open={isOpen}
-            onClose={handleClose}
+        <div>
+          <button
+            className="bg-white text-blue-500 hover:bg-blue-600 text-lg font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 hover:text-white"
+            onClick={handleSignIn}
           >
-            <Card className="mx-auto w-full max-w-[24rem]">
-              <CardHeader
-                variant="gradient"
-                color="blue"
-                className="mb-4 grid h-28 place-items-center"
-              >
-                <Typography variant="h3" color="white">
-                  Sign In
-                </Typography>
-              </CardHeader>
-              <CardBody className="flex flex-col gap-4">
-                <Typography variant="body" className="text-center">
-                  To proceed, please sign in with your Google account.
-                </Typography>
-              </CardBody>
-              <CardFooter className="pt-0">
-                <Button variant="gradient" fullWidth onClick={handleSignIn}>
-                  Login with Google
-                </Button>
-               
-              </CardFooter>
-            </Card>
-          </Dialog>
-        </>
+            Login with Google
+          </button>
+          <p className="mt-4 text-white text-lg">To proceed, please sign in with your Google account.</p>
+        </div>
       )}
     </div>
   );

@@ -15,7 +15,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <SignIn />,
     children: [
-      
       {
         path: "/roadmap",
         element: <Roadmap />,
