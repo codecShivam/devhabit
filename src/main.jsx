@@ -9,6 +9,8 @@ import Roadmap from "./pages/roadmap/Roadmap";
 import Building from "./pages/building/Building";
 import { ThemeProvider } from "@material-tailwind/react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Profilee from "./pages/profile/Profilee";
+import Communitypage from "./pages/community/Communitypage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/roadmap",
         element: <Roadmap />,
+      },
+      {
+        path: "/profile",
+        element: <Profilee />,
+      },
+      {
+        path: "/community",
+        element: <Communitypage />,
       },
       {
         path: "/contact",
