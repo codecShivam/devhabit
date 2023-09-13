@@ -1,16 +1,16 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "../assets/animation.json"; // Replace with the path to your animation JSON file
+import animationData from "../assets/animation_lmeynrvu.json"; // Replace with the path to your animation JSON file
 
 const Hero = () => {
   return (
     <>
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center pb-20 bg-[#e9f1ef]">
         <Lottie
           animationData={animationData}
           loop={true}
           autoplay={true}
-          className="max-w-xl"
+          className="w-[165rem]"
         />
       </div>
       {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">

@@ -206,6 +206,7 @@ function NavList() {
         </Typography>
       </NavLink>
       <NavListMenu />
+      <NavLink to="/profile">
       <Typography
         as="a"
         href="#"
@@ -218,6 +219,7 @@ function NavList() {
           Account
         </ListItem>
       </Typography>
+      </NavLink>
     </List>
   );
 }
