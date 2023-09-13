@@ -1,8 +1,39 @@
-import React from "react";
-import { Card, Typography } from "@material-tailwind/react";
-import { Spinner, Checkbox } from "@material-tailwind/react";
+import React, { useState } from "react";
+import {
+  Card,
+  Typography,
+  Spinner,
+} from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
+import ReactModal from "react-modal";
+import VerificationTask from "./VerificationTask.jsx";
+
+const customModalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    zIndex: 1000,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "80%",
+    maxWidth: "44rem",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+  },
+};
 
 const Table = ({ roadmap, loading }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  const handleCheckboxClick = (taskDescription) => {
+    setSelectedTask(taskDescription);
+    setShowPopup(true);
+  };
+
   return (
     <Card className="h-full w-full overflow-scroll mt-4">
       <table className="w-full min-w-max table-auto text-left">
@@ -68,7 +99,7 @@ const Table = ({ roadmap, loading }) => {
               return (
                 <tr key={index}>
                   <td className={classes}>
-                    <Checkbox />
+                    <Checkbox onClick={() => handleCheckboxClick(description)} />
                     <Typography
                       variant="small"
                       color="blue-gray"
@@ -107,6 +138,19 @@ const Table = ({ roadmap, loading }) => {
           )}
         </tbody>
       </table>
+      <ReactModal
+        isOpen={showPopup}
+        onRequestClose={() => setShowPopup(false)}
+        contentLabel="Task Modal"
+        style={customModalStyles}
+      >
+        {selectedTask && (
+          <VerificationTask
+            verificationDescription={selectedTask}
+            setShowPopup={setShowPopup}
+          />
+        )}
+      </ReactModal>
     </Card>
   );
 };
