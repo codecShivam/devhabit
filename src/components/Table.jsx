@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Typography,
-  Spinner,
-} from "@material-tailwind/react";
-import { Checkbox } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Checkbox } from "@material-tailwind/react";
 import ReactModal from "react-modal";
 import VerificationTask from "./VerificationTask.jsx";
 
@@ -28,9 +23,10 @@ const customModalStyles = {
 const Table = ({ roadmap, loading }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  
 
-  const handleCheckboxClick = (taskDescription) => {
-    setSelectedTask(taskDescription);
+  const handleTaskClick = (description) => {
+    setSelectedTask(description);
     setShowPopup(true);
   };
 
@@ -83,14 +79,9 @@ const Table = ({ roadmap, loading }) => {
               </td>
             </tr>
           ) : (
-            roadmap.map((task, index) => {
-              const lines = task.split("\n");
-              const day = lines[0].trim().slice(0, -1);
-              const description = lines[1].trim().slice(12);
-              const tasks = lines
-                .slice(2)
-                .map((task) => task.trim().slice(1))
-                .filter((task) => task !== "");
+            roadmap.map((roadmapItem, index) => {
+              const { day, description, task1, task2, task3 } = roadmapItem;
+
               const isLast = index === roadmap.length - 1;
               const classes = isLast
                 ? "p-4"
@@ -99,7 +90,6 @@ const Table = ({ roadmap, loading }) => {
               return (
                 <tr key={index}>
                   <td className={classes}>
-                    <Checkbox onClick={() => handleCheckboxClick(description)} />
                     <Typography
                       variant="small"
                       color="blue-gray"
@@ -119,17 +109,42 @@ const Table = ({ roadmap, loading }) => {
                   </td>
                   <td className={classes}>
                     <ul>
-                      {tasks.map((task, index) => (
-                        <li key={index}>
+                      {task1 && (
+                        <li className="flex items-center">
+                          <Checkbox onClick={() => handleTaskClick(task1)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal ml-2 inline-block"
                           >
-                            {task}
+                            {task1}
                           </Typography>
                         </li>
-                      ))}
+                      )}
+                      {task2 && (
+                        <li className="flex items-center">
+                          <Checkbox onClick={() => handleTaskClick(task2)} />
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal ml-2 inline-block"
+                          >
+                            {task2}
+                          </Typography>
+                        </li>
+                      )}
+                      {task3 && (
+                        <li className="flex items-center">
+                          <Checkbox onClick={() => handleTaskClick(task3)} />
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal ml-2 inline-block"
+                          >
+                            {task3}
+                          </Typography>
+                        </li>
+                      )}
                     </ul>
                   </td>
                 </tr>

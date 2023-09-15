@@ -6,7 +6,7 @@ import { Button, Input } from "@material-tailwind/react";
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
   const [days, setDays] = useState("");
-  const { roadmap, generateRoadmap } = useRoadmapContext();
+  const { roadmap, generateRoadmap} = useRoadmapContext(); // Include loading state
   const [loading, setLoading] = useState(false);
 
   const handleGenerateRoadmap = async () => {
@@ -57,7 +57,9 @@ const RoadmapGenerator = () => {
           Generate Roadmap
         </Button>
         <h2 className="mt-8 text-xl font-semibold text-gray-700">Roadmap</h2>
-        <Table roadmap={roadmap} loading={loading}/>
+        
+          <Table roadmap={roadmap} loading={loading} />
+        
       </div>
     </div>
   );

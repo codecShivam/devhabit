@@ -11,6 +11,8 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Profilee from "./pages/profile/Profilee";
 import Communitypage from "./pages/community/Communitypage";
+import Modal from "react-modal";
+Modal.setAppElement("#root"); 
 
 const router = createBrowserRouter([
   {
