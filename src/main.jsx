@@ -1,23 +1,27 @@
-import "./index.css";
 import React from "react";
-import Home from "./components/Home";
-import About from "./pages/about/About";
-import ReactDOM from "react-dom/client";
-import { SignIn } from "./pages/auth/SignIn";
-import Contact from "./pages/contact/Contact";
-import Roadmap from "./pages/roadmap/Roadmap";
-import Building from "./pages/building/Building";
-import { ThemeProvider } from "@material-tailwind/react";
+import ReactDOM from "react-dom";
+import { FirebaseProvider } from "./context/FirebaseContext"; // Import the FirebaseProvider
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Profilee from "./pages/profile/Profilee";
-import Communitypage from "./pages/community/Communitypage";
+import { ThemeProvider } from "@material-tailwind/react";
 import Modal from "react-modal";
-Modal.setAppElement("#root"); 
+import Home from "./components/Home";
+import { SignIn } from "./pages/auth/SignIn";
+import Building from "./pages/building/Building";
+import Roadmap from "./pages/roadmap/Roadmap";
+import Profilee from "./pages/profile/Profilee";
+import Contact from "./pages/contact/Contact";
+import About from "./pages/about/About";
+import Communitypage from "./pages/community/Communitypage";
+import "./index.css";
+
+
+
+Modal.setAppElement("#root");
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignIn />,
+    element: <Home />,
     children: [
       {
         path: "/roadmap",
@@ -28,10 +32,6 @@ const router = createBrowserRouter([
         element: <Profilee />,
       },
       {
-        path: "/community",
-        element: <Communitypage />,
-      },
-      {
         path: "/contact",
         element: <Contact />,
       },
@@ -39,6 +39,10 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+        path: "/community",
+        element: <Communitypage />
+      }
     ],
   },
   {
@@ -49,10 +53,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router}>
-        <Outlet />
-      </RouterProvider>
-    </ThemeProvider>
+    <FirebaseProvider>
+      <ThemeProvider>
+        <RouterProvider router={router}>
+          <Outlet />
+        </RouterProvider>
+      </ThemeProvider>
+    </FirebaseProvider>
   </React.StrictMode>
 );
