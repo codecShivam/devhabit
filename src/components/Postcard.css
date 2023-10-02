@@ -1,0 +1,74 @@
+
+.postcard {
+    width: 550px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+  }
+  
+  .postcard-header {
+    background-color: #7292b4;
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+  }
+  .user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 10px;
+}
+
+.user-info button{
+  background-color: #62a4eb;
+  border-radius: 2px;
+  color: white;
+  padding: 5px 20px;
+}
+
+  .postcard-message {
+    padding: 40px;
+    margin-bottom: 10px;
+  }
+
+  .postcard-actions{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+
+  .likes, .comments{
+    display: flex;
+    align-items: center;
+  }
+
+  ul{
+    outline: black 10px;
+  }
+
+  .main{
+    margin-left: 35%;
+  }
+
+  

@@ -1,9 +1,18 @@
 import React from "react";
+import Postcard from "../../components/Postcard";
+import postcardsData from "../../Data/details.json"
 
 const Communitypage = () => {
     return (
         <div>
-        <h1>Communitypage</h1>
+        {postcardsData.map((postcard) => (
+        <Postcard
+          Username={postcard.Username}
+          TechStack={postcard.TechStack}
+          content={postcard.content}
+          feedback={postcard.feedback}
+        />
+        ))}
         </div>
     );
     }

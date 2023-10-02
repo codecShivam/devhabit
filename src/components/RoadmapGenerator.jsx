@@ -6,7 +6,7 @@ import { Button, Input } from "@material-tailwind/react";
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
   const [days, setDays] = useState("");
-  const { roadmap, generateRoadmap} = useRoadmapContext(); // Include loading state
+  const { roadmap, generateRoadmap} = useRoadmapContext();
   const [loading, setLoading] = useState(false);
 
   const handleGenerateRoadmap = async () => {

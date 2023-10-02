@@ -1,32 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { auth, provider, signInWithPopup } from "../../config/Firebase";
+import React from "react";
+import { useFirebase } from "../../context/FirebaseContext";
 import Home from "../../components/Home";
 
 export function SignIn() {
-  const [user, setUser] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const email = localStorage.getItem("email");
-    if (email) {
-      setUser(email);
-    } else {
-      setIsOpen(true);
-    }
-  }, []);
-
-  const handleSignIn = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      const email = data.user.email;
-      setUser(email);
-      localStorage.setItem("email", email);
-      setIsOpen(false);
-    });
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const { user, handleSignIn } = useFirebase();
 
   return (
     <>

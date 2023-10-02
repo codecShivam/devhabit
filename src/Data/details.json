@@ -1,0 +1,27 @@
+[{
+    "Username": "Rishika",
+    "TechStack": "Java",
+    "content": "Hello I have installed Java Development kit and have learnt some basic data types and variables.",
+    "feedback": "Rating: 8/10"
+},
+{
+    "Username": "Diya",
+    "TechStack": "React",
+    "content": "Installed Node.js and created my first react project. I learnt about components and implementation of jsx",
+    "feedback": "Rating: 6/10"
+},
+{
+    "Username": "Utkarsh",
+    "TechStack": "Android",
+    "content": "Installed android studio and set up the development environment, learnt basics of android and java programming language.",
+    "feedback": "Rating: 8/10"
+},
+{
+    "Username": "Shivam",
+    "TechStack": "Machine-Learning",
+    "content": " Learnt the basics of Machine Learning, such as supervised and unsupervised learning, classification, and regression. Understood the different types of algorithms used in Machine Learning.",
+    "feedback": "Rating: 8/10"
+}
+]
+  
+  

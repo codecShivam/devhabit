@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const VerificationTask = ({ verificationDescription }) => {
-  const [verificationResponse, setVerificationResponse] = useState("");
   const [userResponse, setUserResponse] = useState("");
-  const [ratingResponse, setRatingResponse] = useState("");
   const [feedbackResponse, setFeedbackResponse] = useState("");
+  const [ratingResponse, setRatingResponse] = useState("");
   const [descriptionResponse, setDescriptionResponse] = useState("");
 
   const handleVerifyClick = async () => {
     try {
       const prompt = `You have provided the following response to the question: ${userResponse}. Please provide feedback on your response in approximately 3-4 sentences, and rate it on a scale of 1 to 10. Your rating should be based on how well your response aligns with the topic of ${verificationDescription}. Format the output as follows:
 Feedback: [Your feedback here in 3-4 sentences.]
-Rating: [Your rating, 1-10, based on the alignment of your response with the topic: ${verificationDescription}]
+Rating: [Your rating, 1-10, based on the must alignment of your response with the topic: ${verificationDescription}]
 Description: [Your description related to the task ${verificationDescription} here in 3-4 sentences.]`;
 
       const response = await axios.post(
         "https://api.openai.com/v1/engines/text-davinci-002/completions",
         {
           prompt,
-          max_tokens: 600,
+          max_tokens: 400,
           temperature: 0,
         },
         {
@@ -33,14 +33,12 @@ Description: [Your description related to the task ${verificationDescription} he
 
       const verificationResponse = response.data.choices[0].text;
 
-      // Extract feedback and rating from the response
-      const feedbackMatch = verificationResponse.match(
-        /Feedback: (.*)\nRating:/
-      );
-
+      // Use regex to extract feedback, rating, and description
+      const feedbackMatch = verificationResponse.match(/Feedback: (.*)\nRating:/);
       const ratingMatch = verificationResponse.match(/Rating: (\d+)/);
       const descriptionMatch = verificationResponse.match(/Description: (.*)/);
 
+      // Initialize variables to store extracted data
       let extractedFeedback = "";
       let extractedRating = "";
       let extractedDescription = "";
@@ -52,14 +50,17 @@ Description: [Your description related to the task ${verificationDescription} he
       if (ratingMatch) {
         extractedRating = ratingMatch[1];
       }
+
       if (descriptionMatch) {
         extractedDescription = descriptionMatch[1].trim();
       }
 
+      // Set the state with extracted data
       setFeedbackResponse(extractedFeedback);
       setRatingResponse(extractedRating);
       setDescriptionResponse(extractedDescription);
-      setVerificationResponse(verificationResponse);
+
+      
     } catch (error) {
       console.error("Error verifying learning:", error);
     }
@@ -76,7 +77,7 @@ Description: [Your description related to the task ${verificationDescription} he
         <textarea
           onChange={(e) => setUserResponse(e.target.value)}
           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-          rows="4" // Specify the number of rows you want in the textarea
+          rows="4"
         ></textarea>
       </div>
       <button
@@ -104,8 +105,8 @@ Description: [Your description related to the task ${verificationDescription} he
         </div>
       )}
       {ratingResponse && (
-        <div className="mt-4 ">
-          <h2 className="text-lg p-2 font-semibold mb-2 flex  items-center">
+        <div className="mt-4">
+          <h2 className="text-lg p-2 font-semibold mb-2 flex items-center">
             Rating:
             <div
               className={`w-8 h-8 ml-2 rounded-full flex justify-center items-center text-xl font-semibold mr-2 ${
