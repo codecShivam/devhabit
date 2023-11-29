@@ -1,22 +1,43 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import RoadmapModel from "../components/RoadmapClass";
-// import db from "../config/Firebase"; // Import your Firebase configuration
+import { db } from "../config/Firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 const RoadmapContext = createContext();
 export default RoadmapContext;
-export  const useRoadmapContext = () => {
+export const useRoadmapContext = () => {
   return useContext(RoadmapContext);
 };
 
 export const RoadmapProvider = ({ children }) => {
   const [roadmap, setRoadmap] = useState([]);
-  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const fetchRoadmapFromFirebase = async () => {
+      try {
+        const roadmapCollection = collection(db, "roadmaps");
+        const snapshot = await getDocs(roadmapCollection);
+        if (!snapshot.empty) {
+          const roadmapData = snapshot.docs[0].data().roadmap;
+          const roadmapModels = roadmapData.map((data) => {
+            const { day, description, tasks } = data;
+            const [task1, task2, task3] = tasks;
+            return new RoadmapModel(day, description, task1, task2, task3);
+          });
+          setRoadmap(roadmapModels);
+        }
+      } catch (error) {
+        console.error("Error fetching roadmap from Firestore: ", error);
+      } finally {
+      }
+    };
+
+    fetchRoadmapFromFirebase();
+  }, []);
   const generateRoadmap = async (domain, days) => {
     try {
-      setLoading(true);
-
-      const apiKey = "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";
+      const apiKey = "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";
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
@@ -63,10 +84,13 @@ export const RoadmapProvider = ({ children }) => {
 
         if (tasks) {
           const roadmapModels = tasks.map((task, index) => {
-            const lines = task.split('\n');
+            const lines = task.split("\n");
             const day = lines[0].trim().slice(0, -1);
             const description = lines[1].trim().slice(12);
-            const tasks = lines.slice(2).map((task) => task.trim().slice(1)).filter((task) => task !== "");
+            const tasks = lines
+              .slice(2)
+              .map((task) => task.trim().slice(1))
+              .filter((task) => task !== "");
 
             const [task1, task2, task3] = tasks;
 
@@ -74,6 +98,19 @@ export const RoadmapProvider = ({ children }) => {
           });
 
           setRoadmap(roadmapModels);
+          const roadmapCollection = collection(db, "roadmaps");
+          const roadmapDoc = doc(roadmapCollection);
+          const roadmapData = roadmapModels.map((model) => ({
+            day: model.day,
+            description: model.description,
+            tasks: [model.task1, model.task2, model.task3],
+          }));
+
+          try {
+            await setDoc(roadmapDoc, { roadmap: roadmapData });
+          } catch (error) {
+            console.error("Error adding roadmap to Firestore: ", error);
+          }
         } else {
           setRoadmap([]);
         }
@@ -81,7 +118,7 @@ export const RoadmapProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      await fetchRoadmapFromFirebase();
     }
   };
 
