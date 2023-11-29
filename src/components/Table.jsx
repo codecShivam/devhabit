@@ -3,6 +3,7 @@ import { Card, Typography, Spinner, Checkbox } from "@material-tailwind/react";
 import ReactModal from "react-modal";
 import VerificationTask from "./VerificationTask.jsx";
 
+
 const customModalStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -23,7 +24,6 @@ const customModalStyles = {
 const Table = ({ roadmap, loading }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  
 
   const handleTaskClick = (description) => {
     setSelectedTask(description);
