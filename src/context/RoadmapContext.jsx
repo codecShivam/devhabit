@@ -19,7 +19,8 @@ export const RoadmapProvider = ({ children }) => {
         const roadmapCollection = collection(db, "roadmaps");
         const snapshot = await getDocs(roadmapCollection);
         if (!snapshot.empty) {
-          const roadmapData = snapshot.docs[0].data().roadmap;
+          const lastSnapshot = snapshot.docs.length - 1;
+          const roadmapData = snapshot.docs[lastSnapshot].data().roadmap;
           const roadmapModels = roadmapData.map((data) => {
             const { day, description, tasks } = data;
             const [task1, task2, task3] = tasks;

@@ -21,7 +21,7 @@ Modal.setAppElement("#root");
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <SignIn />,
     children: [
       {
         path: "/roadmap",
