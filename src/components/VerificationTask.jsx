@@ -26,7 +26,7 @@ Description: [Your description related to the task ${verificationDescription} he
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );
