@@ -17,12 +17,6 @@ const HomePage = () => {
         <>
           <Hero />
           <ThreeScene />
-          <button
-            className="fixed top-2 right-36 font-semibold bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
-            onClick={handleLogout}
-          >
-            Sign Out
-          </button>
         </>
       ) : null}
     </>

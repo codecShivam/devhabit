@@ -7,7 +7,8 @@ import Plane from "./Plane";
 
 const ThreeScene = () => {
   return (
-    <Canvas className="z-10">
+    <div className="z-10">
+    <Canvas>
       <OrbitControls />
       <Stars />
       <ambientLight intensity={0.5} />
@@ -17,6 +18,7 @@ const ThreeScene = () => {
         <Plane />
       </Physics>
     </Canvas>
+    </div>
   );
 };
 

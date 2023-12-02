@@ -2,8 +2,12 @@ import React from "react";
 import { useFirebase } from "../context/FirebaseContext";
 
 const ProfilePage = () => {
-    const { user } = useFirebase();
+    const { user, handleSignOut } = useFirebase();
 
+    const handleLogout = () => {
+      handleSignOut();
+     
+    };
     return (
         <div className="flex flex-col items-center">
             <h1 className="text-3xl font-bold mb-4">Welcome, {user.displayName}</h1>
@@ -18,7 +22,14 @@ const ProfilePage = () => {
                     <p className="text-gray-500">{user.displayName}</p>
                 </div>
             </div>
-            {/* Add more profile sections here */}
+            {user && (
+        <button
+          className="font-semibold bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+          onClick={handleLogout}
+        >
+          Sign Out
+        </button>
+      )}
         </div>
     );
 };

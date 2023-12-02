@@ -7,8 +7,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 const FirebaseContext = createContext();
 
 export const useFirebase = () => {
-  const { user, handleSignIn, handleSignOut, createUserDocument } =
-    useContext(FirebaseContext);
+  const { user, handleSignIn, handleSignOut, createUserDocument } = useContext(FirebaseContext);
 
   return { user, handleSignIn, handleSignOut, createUserDocument };
 };
@@ -30,29 +29,29 @@ export const FirebaseProvider = ({ children }) => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const { user, additionalUserInfo } = result;
-  
+
         const email = user.email;
         const uid = user.uid;
         const displayName = user.displayName || additionalUserInfo.profile.name;
         const photoURL = user.photoURL || additionalUserInfo.profile.picture;
-  console.log(email + uid + displayName + photoURL)
+        console.log(email + uid + displayName + photoURL);
         const userData = {
           email: email,
           displayName: displayName,
           photoURL: photoURL,
         };
-  
+
         setUser(userData);
         localStorage.setItem("email", email);
         setIsOpen(false);
-  
+
         createUserDocument(email, userData);
       })
       .catch((error) => {
         console.error("Error signing in:", error);
       });
   };
-  
+
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -67,7 +66,7 @@ export const FirebaseProvider = ({ children }) => {
   const createUserDocument = async (uid, userData) => {
     try {
       const usersCollection = collection(firestore, "users");
-      const userDoc = doc(usersCollection, uid); 
+      const userDoc = doc(usersCollection, uid);
 
       await setDoc(userDoc, userData);
       console.log("User document created successfully!");

@@ -29,7 +29,7 @@ import {
   GiftIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
-
+import { useFirebase } from "../context/FirebaseContext";
 
 const colors = {
   blue: "bg-blue-50 text-blue-500",
@@ -206,27 +206,92 @@ function NavList() {
       </NavLink>
       <NavListMenu />
       <NavLink to="/profile">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-normal"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <UserCircleIcon className="h-[18px] w-[18px]" />
-          Account
-        </ListItem>
-      </Typography>
+        <Typography
+          as="a"
+          href="#"
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            <UserCircleIcon className="h-[18px] w-[18px]" />
+            Account
+          </ListItem>
+        </Typography>
       </NavLink>
     </List>
   );
 }
+
+function ProfileSection({ user, handleSignOut }) {
+  const [isProfileMenuOpen, setProfileMenuOpen] = React.useState(false);
+
+  const handleProfileMenuToggle = () => {
+    setProfileMenuOpen((prev) => !prev);
+  };
+
+  const handleSignOutClick = () => {
+    handleSignOut();
+    setProfileMenuOpen(false);
+  };
+
+  return (
+    <div className="relative">
+      <div className="relative">
+        {!isProfileMenuOpen && (
+          <img
+            src={user.photoURL}
+            alt="User Avatar"
+            className="w-10 h-10 rounded-full cursor-pointer"
+            onClick={handleProfileMenuToggle}
+          />
+        )}
+        {isProfileMenuOpen && (
+          <div className="fixed top-0 right-0 bg-white z-50">
+            <Menu
+              open={isProfileMenuOpen}
+              handler={setProfileMenuOpen}
+              offset={{ mainAxis: 36, crossAxis: -12 }}
+              placement="bottom-end"
+            >
+              <MenuHandler>
+                <div className="p-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={user.photoURL}
+                      alt="User Avatar"
+                      className="w-12 h-12 rounded-full"
+                    />
+                    <div>
+                      <Typography variant="h6" color="blue-gray">
+                        {user.displayName}
+                      </Typography>
+                      <Typography variant="small" color="gray">
+                        {user.email}
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <Button
+                      onClick={handleSignOutClick}
+                      variant="gradient"
+                      size="sm"
+                      fullWidth
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                </div>
+              </MenuHandler>
+            </Menu>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 function NavbarMenu() {
-  const [openSignIn, setOpenSignIn] = React.useState(false);
-  const handleOpenSignIn = () => setOpenSignIn((cur) => !cur);
-  const [openSignUp, setOpenSignUp] = React.useState(false);
-  const handleOpenSignUp = () => setOpenSignUp((cur) => !cur);
+  const { user, handleSignOut } = useFirebase();
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -253,16 +318,7 @@ function NavbarMenu() {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          {/* <SignIn
-            openSignIn={openSignIn}
-            handleOpenSignIn={handleOpenSignIn}
-            handleOpenSignUp={handleOpenSignUp}   
-          />
-          <SignUp
-            openSignUp={openSignUp}
-            handleOpenSignUp={handleOpenSignUp}
-            handleOpenSignIn={handleOpenSignIn}
-          /> */}
+          <ProfileSection user={user} handleSignOut={handleSignOut} />
         </div>
         <IconButton
           variant="text"
