@@ -6,15 +6,24 @@ import { NavLink } from "react-router-dom";
 const Hero = () => {
   return (
     <>
-      <div className="flex flex-row items-center justify-center pb-20 bg-[#e9f1ef]">
+      <div className="flex flex-row z-50 absolute  items-center h-1 top-0 justify-center">
         <Lottie
           animationData={animationData}
           loop={true}
           autoplay={true}
-          className="w-[165rem]"
+          className="ml-24 h-28"
         />
+        
+      </div> <div className="flex flex-row z-50 absolute  items-center h-1 top-0 justify-center">
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          autoplay={true}
+          className="ml-24 h-28"
+        />
+        
       </div>
-      <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+      {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
           <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-5xl bg-gradient-to-r from-[#3578ff] to-[#ea4c89] bg-clip-text text-transparent">
             Devhabit
@@ -42,7 +51,7 @@ const Hero = () => {
             </div>
           </NavLink>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

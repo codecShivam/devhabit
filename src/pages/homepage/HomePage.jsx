@@ -14,7 +14,10 @@ const HomePage = () => {
     <>
       {/* <Hero /> */}
       {user && (
-      <ThreeScene />
+        <>
+          <Hero  />
+          <ThreeScene  />
+        </>
       )}
     </>
   );

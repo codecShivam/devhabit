@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Table from "./Table";
 import { useRoadmapContext } from "../context/RoadmapContext";
 import { Button, Input } from "@material-tailwind/react";
+import Hero from "./Hero";
 
 const RoadmapGenerator = () => {
   const [domain, setDomain] = useState("");
@@ -10,13 +11,11 @@ const RoadmapGenerator = () => {
 
   const handleGenerateRoadmap = async () => {
     try {
-      // Ensure both domain and days are provided
       if (!domain || !days) {
         console.error("Please provide both domain and days.");
         return;
       }
 
-      // Trigger the generation of the roadmap
       await generateRoadmap(domain, days);
     } catch (error) {
       console.error("Error generating roadmap:", error);
@@ -24,6 +23,8 @@ const RoadmapGenerator = () => {
   };
 
   return (
+    <>
+    <Hero />
     <div className="container mx-auto p-8">
       <div className="max-w-full mx-auto bg-white p-6 rounded-md shadow-md">
         <label htmlFor="domainInput" className="block mb-2 text-gray-700">
@@ -62,6 +63,7 @@ const RoadmapGenerator = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

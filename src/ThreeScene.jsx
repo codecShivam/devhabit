@@ -7,7 +7,7 @@ import Plane from "./Plane";
 
 const ThreeScene = () => {
   return (
-    <Canvas>
+    <Canvas className="z-10">
       <OrbitControls />
       <Stars />
       <ambientLight intensity={0.5} />

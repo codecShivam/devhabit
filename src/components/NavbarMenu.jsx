@@ -222,7 +222,6 @@ function NavList() {
     </List>
   );
 }
-
 function NavbarMenu() {
   const [openSignIn, setOpenSignIn] = React.useState(false);
   const handleOpenSignIn = () => setOpenSignIn((cur) => !cur);
@@ -238,8 +237,8 @@ function NavbarMenu() {
   }, []);
 
   return (
-    <Navbar className=" max-w-full bg-transparent  px-4 py-2 rounded-none">
-      <div className="flex items-center justify-between text-blue-gray-900">
+    <Navbar className="max-w-full bg-transparent px-4 py-2 rounded-none">
+      <div className="flex items-center justify-between text-blue-gray-900 ">
         <NavLink to="/">
           <Typography
             as="a"
