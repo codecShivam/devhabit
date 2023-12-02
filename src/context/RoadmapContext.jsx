@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import RoadmapModel from "../components/RoadmapClass";
 import { db } from "../config/Firebase";
-import { collection, doc, setDoc, addDoc, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { useFirebase } from "./FirebaseContext";
 import { deleteDoc } from "firebase/firestore";
 
@@ -14,7 +14,7 @@ export const useRoadmapContext = () => {
 
 export const RoadmapProvider = ({ children }) => {
   const [roadmap, setRoadmap] = useState([]);
-  const { user } = useFirebase(); // Assuming you have a user object from Firebase authentication
+  const { user } = useFirebase();
 
   useEffect(() => {
     const fetchRoadmapFromFirebase = async () => {
@@ -26,16 +26,21 @@ export const RoadmapProvider = ({ children }) => {
             user.email,
             "roadmaps"
           );
-          const snapshot = await getDocs(roadmapCollectionRef);
-          if (!snapshot.empty) {
-            const lastSnapshot = snapshot.docs.length - 1;
-            const roadmapData = snapshot.docs[lastSnapshot].data().roadmap;
+
+          const querySnapshot = await getDocs(roadmapCollectionRef);
+          if (!querySnapshot.empty) {
+            const lastDocument =
+              querySnapshot.docs[querySnapshot.docs.length - 1];
+            const roadmapData = lastDocument.data().roadmap;
             const roadmapModels = roadmapData.map((data) => {
               const { day, description, tasks } = data;
               const [task1, task2, task3] = tasks;
               return new RoadmapModel(day, description, task1, task2, task3);
             });
             setRoadmap(roadmapModels);
+          } else {
+            // Handle case where there are no documents
+            setRoadmap([]);
           }
         }
       } catch (error) {
@@ -103,7 +108,9 @@ export const RoadmapProvider = ({ children }) => {
               .map((task) => task.trim().slice(1))
               .filter((task) => task !== "");
 
+            
             const [task1, task2, task3] = tasks;
+         
 
             return new RoadmapModel(day, description, task1, task2, task3);
           });
@@ -118,7 +125,6 @@ export const RoadmapProvider = ({ children }) => {
               "roadmaps"
             );
 
-            // Delete existing documents in the "roadmaps" collection for the user
             const existingRoadmaps = await getDocs(roadmapCollectionRef);
             await Promise.all(
               existingRoadmaps.docs.map(async (doc) => {
@@ -126,16 +132,21 @@ export const RoadmapProvider = ({ children }) => {
               })
             );
 
-            // Add the new roadmap to the user's "roadmaps" subcollection
-            const roadmapDocRef = await addDoc(roadmapCollectionRef, {
-              roadmap: roadmapModels.map((model) => ({
-                day: model.day,
-                description: model.description,
-                tasks: [model.task1, model.task2, model.task3],
-              })),
-            });
+            await Promise.all(
+              roadmapModels.map(async (model) => {
+                const dayDocumentRef = doc(
+                  roadmapCollectionRef,
+                  model.day.toString()
+                );
+                await setDoc(dayDocumentRef, {
+                  day: model.day,
+                  description: model.description,
+                  tasks: [model.task1, model.task2, model.task3],
+                });
+              })
+            );
 
-            console.log("Roadmap added with ID: ", roadmapDocRef.id);
+            console.log("Roadmap added successfully");
           }
         } else {
           setRoadmap([]);
