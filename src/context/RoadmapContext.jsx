@@ -103,15 +103,10 @@ export const RoadmapProvider = ({ children }) => {
             const lines = task.split("\n");
             const day = lines[0].trim().slice(0, -1);
             const description = lines[1].trim().slice(12);
-            const tasks = lines
+            const [task1, task2, task3] = lines
               .slice(2)
               .map((task) => task.trim().slice(1))
               .filter((task) => task !== "");
-
-            
-            const [task1, task2, task3] = tasks;
-         
-
             return new RoadmapModel(day, description, task1, task2, task3);
           });
 
@@ -141,7 +136,9 @@ export const RoadmapProvider = ({ children }) => {
                 await setDoc(dayDocumentRef, {
                   day: model.day,
                   description: model.description,
-                  tasks: [model.task1, model.task2, model.task3],
+                  task1: model.task1,
+                  task2: model.task2,
+                  task3: model.task3,
                 });
               })
             );
