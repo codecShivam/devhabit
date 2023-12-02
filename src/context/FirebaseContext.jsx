@@ -28,27 +28,31 @@ export const FirebaseProvider = ({ children }) => {
 
   const handleSignIn = () => {
     signInWithPopup(auth, provider)
-      .then((data) => {
-        const email = data.user.email;
-        const uid = data.user.uid; // Get the user's UID
+      .then((result) => {
+        const { user, additionalUserInfo } = result;
+  
+        const email = user.email;
+        const uid = user.uid;
+        const displayName = user.displayName || additionalUserInfo.profile.name;
+        const photoURL = user.photoURL || additionalUserInfo.profile.picture;
+  console.log(email + uid + displayName + photoURL)
         const userData = {
-          // Create an object with user data
           email: email,
-          // Add other user data as needed
+          displayName: displayName,
+          photoURL: photoURL,
         };
-
-        setUser(email);
+  
+        setUser(userData);
         localStorage.setItem("email", email);
         setIsOpen(false);
-
-        // Call createUserDocument to add user data to Firestore
-        createUserDocument(uid, userData);
+  
+        createUserDocument(email, userData);
       })
       .catch((error) => {
         console.error("Error signing in:", error);
       });
   };
-
+  
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -63,7 +67,7 @@ export const FirebaseProvider = ({ children }) => {
   const createUserDocument = async (uid, userData) => {
     try {
       const usersCollection = collection(firestore, "users");
-      const userDoc = doc(usersCollection, uid); // Use the UID as the document ID
+      const userDoc = doc(usersCollection, uid); 
 
       await setDoc(userDoc, userData);
       console.log("User document created successfully!");

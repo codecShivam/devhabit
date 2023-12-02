@@ -26,6 +26,10 @@ const router = createBrowserRouter([
         element: <Roadmap />,
       },
       {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
         path: "/profile",
         element: <Profilee />,
       },
