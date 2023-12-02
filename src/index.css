@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  html,
+  body,
+  #root {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    background: #272727;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
+      segoe ui, arial, sans-serif;
+  }
+  
