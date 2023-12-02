@@ -43,8 +43,9 @@ export const FirebaseProvider = ({ children }) => {
 
         setUser(userData);
         localStorage.setItem("email", email);
+        localStorage.setItem("displayName", displayName)
+        localStorage.setItem("photoURL", photoURL)
         setIsOpen(false);
-
         createUserDocument(email, userData);
       })
       .catch((error) => {

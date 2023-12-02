@@ -1,41 +1,51 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import RoadmapModel from "../components/RoadmapClass";
 import { db } from "../config/Firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc, getDocs } from "firebase/firestore";
+import { useFirebase } from "./FirebaseContext";
+import { deleteDoc } from "firebase/firestore";
 
 const RoadmapContext = createContext();
 export default RoadmapContext;
+
 export const useRoadmapContext = () => {
   return useContext(RoadmapContext);
 };
 
 export const RoadmapProvider = ({ children }) => {
   const [roadmap, setRoadmap] = useState([]);
+  const { user } = useFirebase(); // Assuming you have a user object from Firebase authentication
 
   useEffect(() => {
     const fetchRoadmapFromFirebase = async () => {
       try {
-        const roadmapCollection = collection(db, "roadmaps");
-        const snapshot = await getDocs(roadmapCollection);
-        if (!snapshot.empty) {
-          const lastSnapshot = snapshot.docs.length - 1;
-          const roadmapData = snapshot.docs[lastSnapshot].data().roadmap;
-          const roadmapModels = roadmapData.map((data) => {
-            const { day, description, tasks } = data;
-            const [task1, task2, task3] = tasks;
-            return new RoadmapModel(day, description, task1, task2, task3);
-          });
-          setRoadmap(roadmapModels);
+        if (user) {
+          const roadmapCollectionRef = collection(
+            db,
+            "users",
+            user.email,
+            "roadmaps"
+          );
+          const snapshot = await getDocs(roadmapCollectionRef);
+          if (!snapshot.empty) {
+            const lastSnapshot = snapshot.docs.length - 1;
+            const roadmapData = snapshot.docs[lastSnapshot].data().roadmap;
+            const roadmapModels = roadmapData.map((data) => {
+              const { day, description, tasks } = data;
+              const [task1, task2, task3] = tasks;
+              return new RoadmapModel(day, description, task1, task2, task3);
+            });
+            setRoadmap(roadmapModels);
+          }
         }
       } catch (error) {
         console.error("Error fetching roadmap from Firestore: ", error);
-      } finally {
       }
     };
 
     fetchRoadmapFromFirebase();
-  }, []);
+  }, [user]);
+
   const generateRoadmap = async (domain, days) => {
     try {
       const apiKey = "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";
@@ -99,18 +109,33 @@ export const RoadmapProvider = ({ children }) => {
           });
 
           setRoadmap(roadmapModels);
-          const roadmapCollection = collection(db, "roadmaps");
-          const roadmapDoc = doc(roadmapCollection);
-          const roadmapData = roadmapModels.map((model) => ({
-            day: model.day,
-            description: model.description,
-            tasks: [model.task1, model.task2, model.task3],
-          }));
 
-          try {
-            await setDoc(roadmapDoc, { roadmap: roadmapData });
-          } catch (error) {
-            console.error("Error adding roadmap to Firestore: ", error);
+          if (user) {
+            const roadmapCollectionRef = collection(
+              db,
+              "users",
+              user.email,
+              "roadmaps"
+            );
+
+            // Delete existing documents in the "roadmaps" collection for the user
+            const existingRoadmaps = await getDocs(roadmapCollectionRef);
+            await Promise.all(
+              existingRoadmaps.docs.map(async (doc) => {
+                await deleteDoc(doc.ref);
+              })
+            );
+
+            // Add the new roadmap to the user's "roadmaps" subcollection
+            const roadmapDocRef = await addDoc(roadmapCollectionRef, {
+              roadmap: roadmapModels.map((model) => ({
+                day: model.day,
+                description: model.description,
+                tasks: [model.task1, model.task2, model.task3],
+              })),
+            });
+
+            console.log("Roadmap added with ID: ", roadmapDocRef.id);
           }
         } else {
           setRoadmap([]);
