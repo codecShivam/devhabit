@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import RoadmapModel from "../components/RoadmapClass";
 import { db } from "../config/Firebase";
-import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
 import { useFirebase } from "./FirebaseContext";
-import { deleteDoc } from "firebase/firestore";
 
 const RoadmapContext = createContext();
 export default RoadmapContext;
@@ -156,13 +155,17 @@ export const RoadmapProvider = ({ children }) => {
               "roadmaps"
             );
 
+            // Fetch existing roadmaps
             const existingRoadmaps = await getDocs(roadmapCollectionRef);
+
+            // Delete the existing roadmaps
             await Promise.all(
               existingRoadmaps.docs.map(async (doc) => {
                 await deleteDoc(doc.ref);
               })
             );
 
+            // Add the new roadmaps
             await Promise.all(
               roadmapModels.map(async (model) => {
                 const dayDocumentRef = doc(
