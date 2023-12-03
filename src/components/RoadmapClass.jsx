@@ -5,6 +5,9 @@ class RoadmapModel {
       this.task1 = task1;
       this.task2 = task2;
       this.task3 = task3;
+      this.istask1 = false;
+      this.istask2 = false;
+      this.istask3 = false;
     }
   
     toMap() {
@@ -14,6 +17,9 @@ class RoadmapModel {
         task1: this.task1,
         task2: this.task2,
         task3: this.task3,
+        istask1: this.istask1,
+        istask2: this.istask2,
+        istask3: this.istask3
       };
     }
   
@@ -23,7 +29,10 @@ class RoadmapModel {
         map.description,
         map.task1,
         map.task2,
-        map.task3
+        map.task3,
+        map.istask1,
+        map.istask2,
+        map.istask3
       );
     }
   

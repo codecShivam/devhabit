@@ -33,13 +33,29 @@ export const RoadmapProvider = ({ children }) => {
               querySnapshot.docs[querySnapshot.docs.length - 1];
             const roadmapData = lastDocument.data().roadmap;
             const roadmapModels = roadmapData.map((data) => {
-              const { day, description, tasks } = data;
-              const [task1, task2, task3] = tasks;
-              return new RoadmapModel(day, description, task1, task2, task3);
+              const {
+                day,
+                description,
+                task1,
+                task2,
+                task3,
+                istask1,
+                istask2,
+                istask3,
+              } = data;
+              return new RoadmapModel(
+                day,
+                description,
+                task1,
+                task2,
+                task3,
+                istask1,
+                istask2,
+                istask3
+              );
             });
             setRoadmap(roadmapModels);
           } else {
-            // Handle case where there are no documents
             setRoadmap([]);
           }
         }
@@ -107,7 +123,17 @@ export const RoadmapProvider = ({ children }) => {
               .slice(2)
               .map((task) => task.trim().slice(1))
               .filter((task) => task !== "");
-            return new RoadmapModel(day, description, task1, task2, task3);
+            const [istask1, istask2, istask3] = [false, false, false];
+            return new RoadmapModel(
+              day,
+              description,
+              task1,
+              task2,
+              task3,
+              istask1,
+              istask2,
+              istask3
+            );
           });
 
           setRoadmap(roadmapModels);
@@ -139,6 +165,9 @@ export const RoadmapProvider = ({ children }) => {
                   task1: model.task1,
                   task2: model.task2,
                   task3: model.task3,
+                  istask1: model.istask1,
+                  istask2: model.istask2,
+                  istask3: model.istask3,
                 });
               })
             );
