@@ -154,17 +154,14 @@ console.log(user.email);
               "roadmaps"
             );
 
-            // Fetch existing roadmaps
             const existingRoadmaps = await getDocs(roadmapCollectionRef);
 
-            // Delete the existing roadmaps
             await Promise.all(
               existingRoadmaps.docs.map(async (doc) => {
                 await deleteDoc(doc.ref);
               })
             );
 
-            // Add the new roadmaps
             await Promise.all(
               roadmapModels.map(async (model) => {
                 const dayDocumentRef = doc(
