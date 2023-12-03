@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import RoadmapModel from "./RoadmapClass";
+import { useRoadmapContext } from "../context/RoadmapContext";
+import { useFirebase } from "../context/FirebaseContext";
+import { db } from "../config/Firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const VerificationTask = ({ verificationDescription }) => {
   const [userResponse, setUserResponse] = useState("");
   const [feedbackResponse, setFeedbackResponse] = useState("");
   const [ratingResponse, setRatingResponse] = useState("");
   const [descriptionResponse, setDescriptionResponse] = useState("");
+
+  const { roadmap } = useRoadmapContext();
+  const { user } = useFirebase();
 
   const handleVerifyClick = async () => {
     try {
@@ -33,12 +40,12 @@ Description: [Your description related to the task ${verificationDescription} he
 
       const verificationResponse = response.data.choices[0].text;
 
-      // Use regex to extract feedback, rating, and description
-      const feedbackMatch = verificationResponse.match(/Feedback: (.*)\nRating:/);
+      const feedbackMatch = verificationResponse.match(
+        /Feedback: (.*)\nRating:/
+      );
       const ratingMatch = verificationResponse.match(/Rating: (\d+)/);
       const descriptionMatch = verificationResponse.match(/Description: (.*)/);
 
-      // Initialize variables to store extracted data
       let extractedFeedback = "";
       let extractedRating = "";
       let extractedDescription = "";
@@ -55,17 +62,51 @@ Description: [Your description related to the task ${verificationDescription} he
         extractedDescription = descriptionMatch[1].trim();
       }
 
-      // Set the state with extracted data
       setFeedbackResponse(extractedFeedback);
       setRatingResponse(extractedRating);
       setDescriptionResponse(extractedDescription);
-
-      
+      const updatedRoadmapModel = new RoadmapModel(
+        roadmap.day,
+        roadmap.description,
+        roadmap.task1,
+        roadmap.task2,
+        roadmap.task3,
+        roadmap.istask1 = false,
+        roadmap.istask2 = false,
+        roadmap.istask3 = false,
+        roadmap.feedback = extractedFeedback,
+        roadmap.rating = extractedRating,
+        roadmap.descriptionEplation = extractedDescription
+      );
+      console.log(updatedRoadmapModel);
+      updateRoadmapInFirebase(updatedRoadmapModel);
     } catch (error) {
       console.error("Error verifying learning:", error);
     }
   };
+  const updateRoadmapInFirebase = async (updatedRoadmapModel) => {
+    try {
+      if (user) {
+        const roadmapCollectionRef = collection(
+          db,
+          "users",
+          user.email,
+          "roadmaps"
+        );
 
+        const dayDocumentRef = doc(
+          roadmapCollectionRef,
+          updatedRoadmapModel.day.toString()
+        );
+
+        await setDoc(dayDocumentRef, updatedRoadmapModel.toMap());
+
+        console.log("Roadmap updated successfully" + updatedRoadmapModel);
+      }
+    } catch (error) {
+      console.error("Error updating roadmap in Firestore: ", error);
+    }
+  };
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">
