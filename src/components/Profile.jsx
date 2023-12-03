@@ -10,7 +10,7 @@ const ProfilePage = () => {
     };
     return (
         <div className="flex flex-col items-center justify-center mt-96">
-            <h1 className="text-3xl font-bold mb-4">Welcome, {user.displayName + user}</h1>
+            <h1 className="text-3xl font-bold mb-4">Welcome, {user.displayName}</h1>
             <div className="flex items-center mb-4">
                 <img
                     className="w-16 h-16 rounded-full mr-4"

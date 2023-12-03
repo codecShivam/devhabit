@@ -24,9 +24,11 @@ const customModalStyles = {
 const Table = ({ roadmap, loading }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
 
-  const handleTaskClick = (description) => {
+  const handleTaskClick = (description,day) => {
     setSelectedTask(description);
+    setSelectedDay(day);
     setShowPopup(true);
   };
 
@@ -111,7 +113,7 @@ const Table = ({ roadmap, loading }) => {
                     <ul>
                       {task1 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task1)} />
+                          <Checkbox onClick={() => handleTaskClick(task1,day)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -123,7 +125,7 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task2 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task2)} />
+                          <Checkbox onClick={() => handleTaskClick(task2,day)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -135,7 +137,7 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task3 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task3)} />
+                          <Checkbox onClick={() => handleTaskClick(task3,day)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -162,6 +164,7 @@ const Table = ({ roadmap, loading }) => {
         {selectedTask && (
           <VerificationTask
             verificationDescription={selectedTask}
+            day={selectedDay}
             setShowPopup={setShowPopup}
           />
         )}
