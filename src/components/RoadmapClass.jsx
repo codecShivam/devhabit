@@ -8,6 +8,9 @@ class RoadmapModel {
       this.istask1 = false;
       this.istask2 = false;
       this.istask3 = false;
+      this.rating = "";
+      this.feedback = "";
+      this.descriptionEplanation = "";
     }
   
     toMap() {
@@ -19,7 +22,10 @@ class RoadmapModel {
         task3: this.task3,
         istask1: this.istask1,
         istask2: this.istask2,
-        istask3: this.istask3
+        istask3: this.istask3,
+        rating: this.rating,
+        feedback: this.feedback,
+        descriptionEplanation: this.descriptionEplanation,
       };
     }
   
@@ -32,7 +38,10 @@ class RoadmapModel {
         map.task3,
         map.istask1,
         map.istask2,
-        map.istask3
+        map.istask3,
+        map.rating,
+        map.feedback,
+        map.descriptionEplanation
       );
     }
   

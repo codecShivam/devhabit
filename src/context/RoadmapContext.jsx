@@ -42,6 +42,9 @@ export const RoadmapProvider = ({ children }) => {
                 istask1,
                 istask2,
                 istask3,
+                feedback,
+                rating,
+                descriptionEplanation,
               } = data;
               return new RoadmapModel(
                 day,
@@ -51,7 +54,10 @@ export const RoadmapProvider = ({ children }) => {
                 task3,
                 istask1,
                 istask2,
-                istask3
+                istask3,
+                feedback,
+                rating,
+                descriptionEplanation
               );
             });
             setRoadmap(roadmapModels);
@@ -124,6 +130,7 @@ export const RoadmapProvider = ({ children }) => {
               .map((task) => task.trim().slice(1))
               .filter((task) => task !== "");
             const [istask1, istask2, istask3] = [false, false, false];
+            const [rating, feedback, descriptionEplanation] = ["", "", ""];
             return new RoadmapModel(
               day,
               description,
@@ -132,7 +139,10 @@ export const RoadmapProvider = ({ children }) => {
               task3,
               istask1,
               istask2,
-              istask3
+              istask3,
+              rating,
+              feedback,
+              descriptionEplanation
             );
           });
 
@@ -168,6 +178,9 @@ export const RoadmapProvider = ({ children }) => {
                   istask1: model.istask1,
                   istask2: model.istask2,
                   istask3: model.istask3,
+                  rating: model.rating,
+                  feedback: model.feedback,
+                  descriptionEplanation: model.descriptionEplanation,
                 });
               })
             );
