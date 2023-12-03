@@ -17,9 +17,13 @@ export const FirebaseProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const email = localStorage.getItem("email");
+    const email = sessionStorage.getItem("email");
     if (email) {
-      setUser(email);
+      setUser({
+        email: email,
+        displayName: sessionStorage.getItem("displayName"),
+        photoURL: sessionStorage.getItem("photoURL"),
+      });
     } else {
       setIsOpen(true);
     }
@@ -31,10 +35,9 @@ export const FirebaseProvider = ({ children }) => {
         const { user, additionalUserInfo } = result;
 
         const email = user.email;
-        const uid = user.uid;
         const displayName = user.displayName || additionalUserInfo.profile.name;
         const photoURL = user.photoURL || additionalUserInfo.profile.picture;
-        console.log(email + uid + displayName + photoURL);
+
         const userData = {
           email: email,
           displayName: displayName,
@@ -42,9 +45,9 @@ export const FirebaseProvider = ({ children }) => {
         };
 
         setUser(userData);
-        localStorage.setItem("email", email);
-        localStorage.setItem("displayName", displayName)
-        localStorage.setItem("photoURL", photoURL)
+        sessionStorage.setItem("email", email);
+        sessionStorage.setItem("displayName", displayName);
+        sessionStorage.setItem("photoURL", photoURL);
         setIsOpen(false);
         createUserDocument(email, userData);
       })
@@ -60,7 +63,7 @@ export const FirebaseProvider = ({ children }) => {
   const handleSignOut = () => {
     auth.signOut().then(() => {
       setUser(null);
-      localStorage.removeItem("email");
+      sessionStorage.removeItem("email");
     });
   };
 

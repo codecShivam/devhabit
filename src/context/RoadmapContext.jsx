@@ -19,19 +19,16 @@ export const RoadmapProvider = ({ children }) => {
     const fetchRoadmapFromFirebase = async () => {
       try {
         if (user) {
+console.log(user.email);
           const roadmapCollectionRef = collection(
             db,
             "users",
             user.email,
             "roadmaps"
-          );
-
+            );
           const querySnapshot = await getDocs(roadmapCollectionRef);
           if (!querySnapshot.empty) {
-            const lastDocument =
-              querySnapshot.docs[querySnapshot.docs.length - 1];
-            const roadmapData = lastDocument.data().roadmap;
-            const roadmapModels = roadmapData.map((data) => {
+            const roadmapModels = querySnapshot.docs.map((doc) => {
               const {
                 day,
                 description,
@@ -41,10 +38,10 @@ export const RoadmapProvider = ({ children }) => {
                 istask1,
                 istask2,
                 istask3,
-                feedback,
                 rating,
+                feedback,
                 descriptionEplanation,
-              } = data;
+              } = doc.data();
               return new RoadmapModel(
                 day,
                 description,
@@ -54,11 +51,12 @@ export const RoadmapProvider = ({ children }) => {
                 istask1,
                 istask2,
                 istask3,
-                feedback,
                 rating,
+                feedback,
                 descriptionEplanation
               );
             });
+  
             setRoadmap(roadmapModels);
           } else {
             setRoadmap([]);
@@ -68,9 +66,10 @@ export const RoadmapProvider = ({ children }) => {
         console.error("Error fetching roadmap from Firestore: ", error);
       }
     };
-
+  
     fetchRoadmapFromFirebase();
-  }, [user]);
+  }, []);
+  
 
   const generateRoadmap = async (domain, days) => {
     try {
