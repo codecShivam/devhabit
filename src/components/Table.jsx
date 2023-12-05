@@ -3,7 +3,6 @@ import { Card, Typography, Spinner, Checkbox } from "@material-tailwind/react";
 import ReactModal from "react-modal";
 import VerificationTask from "./VerificationTask.jsx";
 
-
 const customModalStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -25,10 +24,12 @@ const Table = ({ roadmap, loading }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [index, setIndex] = useState(null);
+  const [istask, setIstask] = useState(null);
 
-  const handleTaskClick = (description,index) => {
+  const handleTaskClick = (description, index, isTask) => {
     setSelectedTask(description);
     setIndex(index);
+    setIstask(isTask)
     setShowPopup(true);
   };
 
@@ -82,7 +83,7 @@ const Table = ({ roadmap, loading }) => {
             </tr>
           ) : (
             roadmap.map((roadmapItem, index) => {
-              console.log(index)
+              console.log(index);
               const { day, description, task1, task2, task3 } = roadmapItem;
 
               const isLast = index === roadmap.length - 1;
@@ -114,7 +115,11 @@ const Table = ({ roadmap, loading }) => {
                     <ul>
                       {task1 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task1,index)} />
+                          <Checkbox
+                            onClick={() =>
+                              handleTaskClick(task1, index, "istask1")
+                            }
+                          />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -126,7 +131,11 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task2 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task2,index)} />
+                          <Checkbox
+                            onClick={() =>
+                              handleTaskClick(task2, index, "istask2")
+                            }
+                          />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -138,7 +147,11 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task3 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task3,index)} />
+                          <Checkbox
+                            onClick={() =>
+                              handleTaskClick(task3, index, "istask3")
+                            }
+                          />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -166,6 +179,7 @@ const Table = ({ roadmap, loading }) => {
           <VerificationTask
             verificationDescription={selectedTask}
             day={index}
+            istask={istask}
             setShowPopup={setShowPopup}
           />
         )}

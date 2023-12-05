@@ -6,7 +6,7 @@ import { useFirebase } from "../context/FirebaseContext";
 import { db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-const VerificationTask = ({ verificationDescription, day }) => {
+const VerificationTask = ({ verificationDescription, day, istask }) => {
   const [userResponse, setUserResponse] = useState("");
   const [feedbackResponse, setFeedbackResponse] = useState("");
   const [ratingResponse, setRatingResponse] = useState("");
@@ -68,6 +68,8 @@ Description: [Your description related to the task ${verificationDescription} he
       roadmap[day].feedback = feedback;
       roadmap[day].rating = rating;
       roadmap[day].descriptionEplanation = descriptionEplanation;
+      roadmap[day][istask] = rating > 2;
+      console.log(roadmap[day]);
       updateRoadmapInFirebase(roadmap[day]);
     } catch (error) {
       console.error("Error verifying learning:", error);
