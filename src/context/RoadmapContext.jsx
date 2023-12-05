@@ -1,7 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import RoadmapModel from "../components/RoadmapClass";
 import { db } from "../config/Firebase";
-import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
 import { useFirebase } from "./FirebaseContext";
 
 const RoadmapContext = createContext();
@@ -19,13 +25,12 @@ export const RoadmapProvider = ({ children }) => {
     const fetchRoadmapFromFirebase = async () => {
       try {
         if (user) {
-console.log(user.email);
           const roadmapCollectionRef = collection(
             db,
             "users",
             user.email,
             "roadmaps"
-            );
+          );
           const querySnapshot = await getDocs(roadmapCollectionRef);
           if (!querySnapshot.empty) {
             const roadmapModels = querySnapshot.docs.map((doc) => {
@@ -56,7 +61,7 @@ console.log(user.email);
                 descriptionEplanation
               );
             });
-  
+
             setRoadmap(roadmapModels);
           } else {
             setRoadmap([]);
@@ -66,10 +71,8 @@ console.log(user.email);
         console.error("Error fetching roadmap from Firestore: ", error);
       }
     };
-  
     fetchRoadmapFromFirebase();
   }, []);
-  
 
   const generateRoadmap = async (domain, days) => {
     try {

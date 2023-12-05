@@ -24,11 +24,11 @@ const customModalStyles = {
 const Table = ({ roadmap, loading }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [selectedDay, setSelectedDay] = useState(null);
+  const [index, setIndex] = useState(null);
 
-  const handleTaskClick = (description,day) => {
+  const handleTaskClick = (description,index) => {
     setSelectedTask(description);
-    setSelectedDay(day);
+    setIndex(index);
     setShowPopup(true);
   };
 
@@ -82,6 +82,7 @@ const Table = ({ roadmap, loading }) => {
             </tr>
           ) : (
             roadmap.map((roadmapItem, index) => {
+              console.log(index)
               const { day, description, task1, task2, task3 } = roadmapItem;
 
               const isLast = index === roadmap.length - 1;
@@ -113,7 +114,7 @@ const Table = ({ roadmap, loading }) => {
                     <ul>
                       {task1 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task1,day)} />
+                          <Checkbox onClick={() => handleTaskClick(task1,index)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -125,7 +126,7 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task2 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task2,day)} />
+                          <Checkbox onClick={() => handleTaskClick(task2,index)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -137,7 +138,7 @@ const Table = ({ roadmap, loading }) => {
                       )}
                       {task3 && (
                         <li className="flex items-center">
-                          <Checkbox onClick={() => handleTaskClick(task3,day)} />
+                          <Checkbox onClick={() => handleTaskClick(task3,index)} />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -164,7 +165,7 @@ const Table = ({ roadmap, loading }) => {
         {selectedTask && (
           <VerificationTask
             verificationDescription={selectedTask}
-            day={selectedDay}
+            day={index}
             setShowPopup={setShowPopup}
           />
         )}
