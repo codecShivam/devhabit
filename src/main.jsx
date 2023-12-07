@@ -14,6 +14,7 @@ import About from "./pages/about/About";
 import Communitypage from "./pages/community/Communitypage";
 import "./index.css";
 import ThreeScene from "./ThreeScene";
+import { VerificationProvider } from "./context/VerificationContext";
 Modal.setAppElement("#root");
 
 const router = createBrowserRouter([
@@ -23,7 +24,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/roadmap",
-        element: <Roadmap />,
+        element: (
+          <VerificationProvider>
+            {" "}
+            <Roadmap />,
+          </VerificationProvider>
+        ),
       },
       {
         path: "/signin",
@@ -43,8 +49,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/community",
-        element: <Communitypage />
-      }
+        element: <Communitypage />,
+      },
     ],
   },
   {

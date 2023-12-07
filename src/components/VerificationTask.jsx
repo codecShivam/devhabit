@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import RoadmapModel from "./RoadmapClass";
 import { useRoadmapContext } from "../context/RoadmapContext";
 import { useFirebase } from "../context/FirebaseContext";
 import { db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useVerificationContext, VerificationProvider } from "../context/VerificationContext";
 
 const VerificationTask = ({ verificationDescription, day, istask }) => {
+  const { verificationState, setVerificationState } = useVerificationContext();
   const [userResponse, setUserResponse] = useState("");
   const [feedbackResponse, setFeedbackResponse] = useState("");
   const [ratingResponse, setRatingResponse] = useState("");
@@ -71,6 +72,12 @@ Description: [Your description related to the task ${verificationDescription} he
       roadmap[day][istask] = rating > 2;
       console.log(roadmap[day]);
       updateRoadmapInFirebase(roadmap[day]);
+      setVerificationState({
+        userResponse,
+        feedbackResponse,
+        ratingResponse,
+        descriptionResponse,
+      });
     } catch (error) {
       console.error("Error verifying learning:", error);
     }
@@ -157,4 +164,10 @@ Description: [Your description related to the task ${verificationDescription} he
   );
 };
 
-export default VerificationTask;
+const VerificationTaskWithContext = (props) => (
+  <VerificationProvider>
+    <VerificationTask {...props} />
+  </VerificationProvider>
+);
+
+export default VerificationTaskWithContext;
