@@ -30,11 +30,14 @@ const Table = () => {
   const { roadmap, loading } = useRoadmapContext();
 
   const handleTaskClick = (description, index, isTask) => {
+    event.preventDefault();
     setSelectedTask(description);
     setIndex(index);
     setIstask(isTask);
     setShowPopup(true);
   };
+
+  console.log(roadmap);
 
   return (
     <Card className="h-full w-full overflow-scroll mt-4">
