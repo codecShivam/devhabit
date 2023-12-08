@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Typography, Spinner, Checkbox } from "@material-tailwind/react";
 import ReactModal from "react-modal";
 import VerificationTask from "./VerificationTask.jsx";
+import { useRoadmapContext } from "../context/RoadmapContext.jsx";
 
 const customModalStyles = {
   overlay: {
@@ -20,16 +21,21 @@ const customModalStyles = {
   },
 };
 
-const Table = ({ roadmap, loading }) => {
+const Table = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [index, setIndex] = useState(null);
   const [istask, setIstask] = useState(null);
 
+  const { roadmap, loading } = useRoadmapContext();
+  useEffect(() => {
+    // console.log(roadmap);
+  }, []);
+
   const handleTaskClick = (description, index, isTask) => {
     setSelectedTask(description);
     setIndex(index);
-    setIstask(isTask)
+    setIstask(isTask);
     setShowPopup(true);
   };
 
@@ -83,7 +89,6 @@ const Table = ({ roadmap, loading }) => {
             </tr>
           ) : (
             roadmap.map((roadmapItem, index) => {
-              console.log(index);
               const { day, description, task1, task2, task3 } = roadmapItem;
 
               const isLast = index === roadmap.length - 1;

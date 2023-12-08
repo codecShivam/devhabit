@@ -4,7 +4,10 @@ import { useRoadmapContext } from "../context/RoadmapContext";
 import { useFirebase } from "../context/FirebaseContext";
 import { db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useVerificationContext, VerificationProvider } from "../context/VerificationContext";
+import {
+  useVerificationContext,
+  VerificationProvider,
+} from "../context/VerificationContext";
 
 const VerificationTask = ({ verificationDescription, day, istask }) => {
   const { verificationState, setVerificationState } = useVerificationContext();
@@ -70,7 +73,6 @@ Description: [Your description related to the task ${verificationDescription} he
       roadmap[day].rating = rating;
       roadmap[day].descriptionEplanation = descriptionEplanation;
       roadmap[day][istask] = rating > 2;
-      console.log(roadmap[day]);
       updateRoadmapInFirebase(roadmap[day]);
       setVerificationState({
         userResponse,
@@ -82,12 +84,10 @@ Description: [Your description related to the task ${verificationDescription} he
       console.error("Error verifying learning:", error);
     }
   };
-  console.log(roadmap[day]);
 
   const updateRoadmapInFirebase = async (roadmapModel) => {
     try {
       if (user) {
-        console.log("Updating roadmap in Firestore: ", roadmapModel);
         const roadmapCollectionRef = doc(
           db,
           "users",
@@ -97,7 +97,6 @@ Description: [Your description related to the task ${verificationDescription} he
         );
         const roadmapData = roadmapModel.toObject();
         await setDoc(roadmapCollectionRef, roadmapData);
-
         console.log("Roadmap updated successfully" + roadmapData);
       }
     } catch (error) {

@@ -60,8 +60,8 @@ export const RoadmapProvider = ({ children }) => {
                 feedback,
                 descriptionEplanation
               );
-            });
-
+              });
+              console.log( roadmapModels);
             setRoadmap(roadmapModels);
           } else {
             setRoadmap([]);
