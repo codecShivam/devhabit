@@ -28,9 +28,6 @@ const Table = () => {
   const [istask, setIstask] = useState(null);
 
   const { roadmap, loading } = useRoadmapContext();
-  useEffect(() => {
-    // console.log(roadmap);
-  }, []);
 
   const handleTaskClick = (description, index, isTask) => {
     setSelectedTask(description);
@@ -89,7 +86,16 @@ const Table = () => {
             </tr>
           ) : (
             roadmap.map((roadmapItem, index) => {
-              const { day, description, task1, task2, task3 } = roadmapItem;
+              const {
+                day,
+                description,
+                task1,
+                task2,
+                task3,
+                istask1,
+                istak2,
+                istask3,
+              } = roadmapItem;
 
               const isLast = index === roadmap.length - 1;
               const classes = isLast
@@ -124,6 +130,7 @@ const Table = () => {
                             onClick={() =>
                               handleTaskClick(task1, index, "istask1")
                             }
+                            checked={istask1}
                           />
                           <Typography
                             variant="small"
@@ -140,6 +147,7 @@ const Table = () => {
                             onClick={() =>
                               handleTaskClick(task2, index, "istask2")
                             }
+                            checked={istak2}
                           />
                           <Typography
                             variant="small"
@@ -156,6 +164,7 @@ const Table = () => {
                             onClick={() =>
                               handleTaskClick(task3, index, "istask3")
                             }
+                            checked={istask3}
                           />
                           <Typography
                             variant="small"

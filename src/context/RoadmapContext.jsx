@@ -61,7 +61,6 @@ export const RoadmapProvider = ({ children }) => {
                 descriptionEplanation
               );
               });
-              console.log( roadmapModels);
             setRoadmap(roadmapModels);
           } else {
             setRoadmap([]);
