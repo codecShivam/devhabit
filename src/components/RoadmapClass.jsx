@@ -1,16 +1,28 @@
 class RoadmapModel {
-  constructor(day, description, task1, task2, task3) {
+  constructor(
+    day,
+    description,
+    task1,
+    task2,
+    task3,
+    istask1,
+    istask2,
+    istask3,
+    rating,
+    feedback,
+    descriptionEplanation
+  ) {
     this.day = day;
     this.description = description;
     this.task1 = task1;
     this.task2 = task2;
     this.task3 = task3;
-    this.istask1 = false;
-    this.istask2 = false;
-    this.istask3 = false;
-    this.rating = "";
-    this.feedback = "";
-    this.descriptionEplanation = "";
+    this.istask1 = istask1;
+    this.istask2 = istask2;
+    this.istask3 = istask3;
+    this.rating = rating;
+    this.feedback = feedback;
+    this.descriptionEplanation = descriptionEplanation;
   }
 
   toMap() {
