@@ -25,15 +25,14 @@ const Table = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [index, setIndex] = useState(null);
-  const [istask, setIstask] = useState(null);
+  const [passedTask, setPassedTask] = useState("");
 
   const { roadmap, loading } = useRoadmapContext();
 
-  const handleTaskClick = (description, index, isTask) => {
-    event.preventDefault();
+  const handleTaskClick = (description, index, passedTask) => {
     setSelectedTask(description);
     setIndex(index);
-    setIstask(isTask);
+    setPassedTask(passedTask);
     setShowPopup(true);
   };
 
@@ -96,7 +95,7 @@ const Table = () => {
                 task2,
                 task3,
                 istask1,
-                istak2,
+                istask2,
                 istask3,
               } = roadmapItem;
 
@@ -150,7 +149,7 @@ const Table = () => {
                             onClick={() =>
                               handleTaskClick(task2, index, "istask2")
                             }
-                            checked={istak2}
+                            checked={istask2}
                           />
                           <Typography
                             variant="small"
@@ -196,7 +195,7 @@ const Table = () => {
           <VerificationTask
             verificationDescription={selectedTask}
             day={index}
-            istask={istask}
+            istask={passedTask}
             setShowPopup={setShowPopup}
           />
         )}
