@@ -60,7 +60,7 @@ export const RoadmapProvider = ({ children }) => {
                 feedback,
                 descriptionEplanation
               );
-              });
+            });
             setRoadmap(roadmapModels);
           } else {
             setRoadmap([]);
@@ -75,35 +75,35 @@ export const RoadmapProvider = ({ children }) => {
 
   const generateRoadmap = async (domain, days) => {
     try {
-      const apiKey = "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";
+      const apiKey = "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";
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       };
       const body = {
-        model: "text-davinci-003",
+        model: "gpt-3.5-turbo-instruct", 
         prompt: `Create a day-wise roadmap to learn ${domain} in ${days} days. Provide a detailed plan for each day, including tasks and topics to cover. Start with the basics and progress to more advanced concepts. Add a brief description for each day's tasks. Make sure to break down the learning material appropriately. Format the output as follows:
 
-        Day 1:
-        Description: [Description of tasks and topics]
-        - [Task 1]
-        - [Task 2]
-        ...
+Day 1:
+Description: [Description of tasks and topics]
+- [Task 1]
+- [Task 2]
+...
 
-        Day 2:
-        Description: [Description of tasks and topics]
-        - [Task 1]
-        - [Task 2]
-        ...
+Day 2:
+Description: [Description of tasks and topics]
+- [Task 1]
+- [Task 2]
+...
 
-        ...
+...
 
-        Day ${days}:
-        Description: [Description of tasks and topics]
-        - [Task 1]
-        - [Task 2]
-        ...
-      `,
+Day ${days}:
+Description: [Description of tasks and topics]
+- [Task 1]
+- [Task 2]
+...
+`,
         max_tokens: 3700,
         temperature: 0,
       };
@@ -115,6 +115,7 @@ export const RoadmapProvider = ({ children }) => {
       });
 
       const data = await res.json();
+      console.log(data);
 
       if (res.status === 200) {
         const roadmapText = data.choices[0].text;
